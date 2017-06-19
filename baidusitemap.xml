@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/15/%E4%BD%BF%E7%94%A8hexo%E6%9E%81%E9%80%9F%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84github%E5%8D%9A%E5%AE%A2/</loc>
+    <lastmod>2017-06-16T16:17:01.000Z</lastmod>
+    <data>
+        <display>
+        <title>使用hexo极速搭建自己的github博客</title>
+        <pubTime>2017-06-15T14:30:13.000Z</pubTime>
+        
+        <tag>hexo</tag>
+         
+        <tag>github</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/16/%E7%BB%93%E5%90%88LeanCloud%E4%B8%BANexT%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E9%87%8F%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD/</loc>
+    <lastmod>2017-06-16T05:23:17.000Z</lastmod>
+    <data>
+        <display>
+        <title>结合LeanCloud为NexT主题添加文章阅读量统计功能</title>
+        <pubTime>2017-06-16T04:27:25.000Z</pubTime>
+        
+        <tag>阅读量</tag>
+         
+        <tag>hexo</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/15/hello-world/</loc>
+    <lastmod>2017-06-15T10:46:17.000Z</lastmod>
+    <data>
+        <display>
+        <title>Hello World</title>
+        <pubTime>2017-06-15T10:46:17.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+</urlset>
