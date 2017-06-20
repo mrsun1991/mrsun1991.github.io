@@ -4,6 +4,21 @@
 
     
   <url>
+    <loc>http://yoursite.com/2017/06/20/%E5%85%B3%E4%BA%8Egit%E5%A6%82%E4%BD%95%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/</loc>
+    <lastmod>2017-06-20T08:21:26.000Z</lastmod>
+    <data>
+        <display>
+        <title>关于git如何合并两个远程仓库</title>
+        <pubTime>2017-06-20T06:53:12.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2017/06/15/%E4%BD%BF%E7%94%A8hexo%E6%9E%81%E9%80%9F%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84github%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2017-06-16T16:17:01.000Z</lastmod>
     <data>
@@ -32,9 +47,9 @@
         <title>结合LeanCloud为NexT主题添加文章阅读量统计功能</title>
         <pubTime>2017-06-16T04:27:25.000Z</pubTime>
         
-        <tag>阅读量</tag>
-         
         <tag>hexo</tag>
+         
+        <tag>阅读量</tag>
          
          
            
