@@ -104,7 +104,7 @@
 <meta property="og:url" content="http://layne_sun.coding.me/2017/07/31/Python爬虫之BeautifulSoup/index.html">
 <meta property="og:site_name" content="Layne&#39;s Blog">
 <meta property="og:description" content="最近在学习Python做爬虫和数据分析，发现网上很多文章都是介绍的urlib加正则的方式去爬数据，这个对初学者来说很别扭，尽管我之前正则表达式用的还可以，但是现在已经一两年没接触了，长时间不用，使用起来很麻烦，稍有一点问题，就会导致匹配到的数据一塌糊涂。后来看到requests和BeautifulSoup结合起来爬网页数据的方式，好简洁的语法，酷毙了，果断使用新的方式。 PS:当然完全靠Beaut">
-<meta property="og:updated_time" content="2017-07-31T05:46:08.000Z">
+<meta property="og:updated_time" content="2017-08-07T07:56:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python爬虫之BeautifulSoup">
 <meta name="twitter:description" content="最近在学习Python做爬虫和数据分析，发现网上很多文章都是介绍的urlib加正则的方式去爬数据，这个对初学者来说很别扭，尽管我之前正则表达式用的还可以，但是现在已经一两年没接触了，长时间不用，使用起来很麻烦，稍有一点问题，就会导致匹配到的数据一塌糊涂。后来看到requests和BeautifulSoup结合起来爬网页数据的方式，好简洁的语法，酷毙了，果断使用新的方式。 PS:当然完全靠Beaut">
@@ -346,11 +346,86 @@
 
       
         <p>最近在学习Python做爬虫和数据分析，发现网上很多文章都是介绍的urlib加正则的方式去爬数据，这个对初学者来说很别扭，尽管我之前正则表达式用的还可以，但是现在已经一两年没接触了，长时间不用，使用起来很麻烦，稍有一点问题，就会导致匹配到的数据一塌糊涂。后来看到requests和BeautifulSoup结合起来爬网页数据的方式，好简洁的语法，酷毙了，果断使用新的方式。</p>
-<h6 id="PS-当然完全靠BeautifulSoup去解析匹配数据可能并不能做到十全十美，不过这个完全不用担心，因为BeautifulSoup语法中支持嵌套正则表达式，这样一来，完全所向披靡啊，数据海洋，我来啦"><a href="#PS-当然完全靠BeautifulSoup去解析匹配数据可能并不能做到十全十美，不过这个完全不用担心，因为BeautifulSoup语法中支持嵌套正则表达式，这样一来，完全所向披靡啊，数据海洋，我来啦" class="headerlink" title="PS:当然完全靠BeautifulSoup去解析匹配数据可能并不能做到十全十美，不过这个完全不用担心，因为BeautifulSoup语法中支持嵌套正则表达式，这样一来，完全所向披靡啊，数据海洋，我来啦"></a>PS:当然完全靠BeautifulSoup去解析匹配数据可能并不能做到十全十美，不过这个完全不用担心，因为BeautifulSoup语法中支持嵌套正则表达式，这样一来，完全所向披靡啊，数据海洋，我来啦</h6><h3 id="1-BeautifulSoup简介"><a href="#1-BeautifulSoup简介" class="headerlink" title="1.BeautifulSoup简介"></a>1.BeautifulSoup简介</h3><p>BeautifulSoup是Python的一个数据抓取类库，官方文档解释如下：</p>
+<h6 id="PS-当然完全靠BeautifulSoup去解析匹配数据可能并不能做到十全十美，不过这个完全不用担心，因为BeautifulSoup语法中支持嵌套正则表达式，这样一来，完全所向披靡啊，数据海洋，我来啦"><a href="#PS-当然完全靠BeautifulSoup去解析匹配数据可能并不能做到十全十美，不过这个完全不用担心，因为BeautifulSoup语法中支持嵌套正则表达式，这样一来，完全所向披靡啊，数据海洋，我来啦" class="headerlink" title="PS:当然完全靠BeautifulSoup去解析匹配数据可能并不能做到十全十美，不过这个完全不用担心，因为BeautifulSoup语法中支持嵌套正则表达式，这样一来，完全所向披靡啊，数据海洋，我来啦"></a>PS:当然完全靠BeautifulSoup去解析匹配数据可能并不能做到十全十美，不过这个完全不用担心，因为BeautifulSoup语法中支持嵌套正则表达式，这样一来，完全所向披靡啊，数据海洋，我来啦</h6><h3 id="1-BeautifulSoup简介"><a href="#1-BeautifulSoup简介" class="headerlink" title="1.BeautifulSoup简介"></a>1.BeautifulSoup简介</h3><p>Beautiful Soup 相比其他的html解析有个非常重要的优势。html会被拆解为对象处理。全篇转化为字典和数组。<br>相比正则解析的内容，省略了学习正则的高成本。<br>BeautifulSoup是Python的一个数据抓取类库，官方文档解释如下：</p>
 <p>   <code>Beautiful Soup 是一个可以从 HTML 或 XML 文件中提取数据的 Python 库.它能够通过你喜欢的转换器实现惯用的文档导航,查找,修改文档的方式.Beautiful Soup 会帮你节省数小时甚至数天的工作时间.
     Beautiful Soup自动将输入文档转换为Unicode编码，输出文档转换为utf-8编码。你不需要考虑编码方式，除非文档没有指定一个编码方式，这时，Beautiful Soup就不能自动识别编码方式了。然后，你仅仅需要说明一下原始编码方式就可以了。</code></p>
 <h3 id="2-安装（Python-2-7-for-Mac）"><a href="#2-安装（Python-2-7-for-Mac）" class="headerlink" title="2.安装（Python 2.7 for Mac）"></a>2.安装（Python 2.7 for Mac）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pip install beautifulsoup4</div></pre></td></tr></table></figure>
-<h5 id="Beautiful-Soup不只支持HTML解析器，还支持一些三方的解析器，可以根据需要安装相应的库（lxml，xml，html5lib）"><a href="#Beautiful-Soup不只支持HTML解析器，还支持一些三方的解析器，可以根据需要安装相应的库（lxml，xml，html5lib）" class="headerlink" title="Beautiful Soup不只支持HTML解析器，还支持一些三方的解析器，可以根据需要安装相应的库（lxml，xml，html5lib）"></a>Beautiful Soup不只支持HTML解析器，还支持一些三方的解析器，可以根据需要安装相应的库（lxml，xml，html5lib）</h5><h2 id="3-Beautiful-Soup-使用"><a href="#3-Beautiful-Soup-使用" class="headerlink" title="3.Beautiful Soup 使用"></a>3.Beautiful Soup 使用</h2>
+<h5 id="Beautiful-Soup不只支持HTML解析器，还支持一些三方的解析器，可以根据需要安装相应的库（lxml，xml，html5lib）"><a href="#Beautiful-Soup不只支持HTML解析器，还支持一些三方的解析器，可以根据需要安装相应的库（lxml，xml，html5lib）" class="headerlink" title="Beautiful Soup不只支持HTML解析器，还支持一些三方的解析器，可以根据需要安装相应的库（lxml，xml，html5lib）"></a>Beautiful Soup不只支持HTML解析器，还支持一些三方的解析器，可以根据需要安装相应的库（lxml，xml，html5lib）</h5><h2 id="3-Beautiful-Soup-使用"><a href="#3-Beautiful-Soup-使用" class="headerlink" title="3.Beautiful Soup 使用"></a>3.Beautiful Soup 使用</h2><ul>
+<li>构造一个Beautiful Soup对象</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">from BeautifulSoup import </div><div class="line">soup = BeautifulSoup(&quot;&quot;&quot;&lt;html&gt;&lt;head&gt;&lt;title&gt;This is title&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;p class=&quot;title&quot; name=&quot;name1&quot;&gt;data&lt;/p&gt;&lt;p class=&quot;title2&quot; name=&quot;name2&quot;&gt;data&lt;/p&gt;&lt;a class=&quot;aClass&quot; href=&quot;http://www.baidu.com&quot; id=&quot;link&quot;&gt;&lt;!-- 注释内容：Baidu --&gt;&lt;/a&gt;</div></pre></td></tr></table></figure>
+<p>当然我们也可以直接用本地的HTML文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">soup = BeautifulSoup(&apos;index.html&apos;)</div></pre></td></tr></table></figure>
+<ul>
+<li>格式化输出内容</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print soup.prettify()</div></pre></td></tr></table></figure>
+<p>输出：<br><code>&lt;html&gt;
+ &lt;head&gt;
+  &lt;title&gt;
+   This is title
+  &lt;/title&gt;
+ &lt;/head&gt;
+ &lt;body&gt;
+  &lt;p class=&quot;title&quot; name=&quot;name1&quot;&gt;
+   data
+  &lt;/p&gt;
+  &lt;p class=&quot;title2&quot; name=&quot;name2&quot;&gt;
+   data
+  &lt;/p&gt;
+  &lt;a class=&quot;aClass&quot; href=&quot;http://www.baidu.com&quot; id=&quot;link&quot;&gt;
+   &lt;!-- 注释内容：Baidu --&gt;
+  &lt;/a&gt;
+ &lt;/body&gt;
+&lt;/html&gt;</code><br>使用这个函数我们可以清楚的看到HTML内容的结构，用来分析要爬取的内容相当有帮助。</p>
+<ul>
+<li><p>查找Beautiful Soup对象的HTML内容</p>
+<p>  Beautiful Soup让我感觉非常方便的是，它支持.语法，可以通过.去访问你需要的元素</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(soup.title)</div></pre></td></tr></table></figure>
+<p>输出：<br><code>&lt;title&gt;This is title&lt;/title&gt;</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(soup.body)</div></pre></td></tr></table></figure>
+<p>输出：<br><code>&lt;body&gt;&lt;p class=&quot;title&quot; name=&quot;name1&quot;&gt;data&lt;/p&gt;&lt;p class=&quot;title2&quot; name=&quot;name2&quot;&gt;data&lt;/p&gt;&lt;a class=&quot;aClass&quot; href=&quot;http://www.baidu.com&quot; id=&quot;link&quot;&gt;&lt;!-- 注释内容：Baidu --&gt;&lt;/a&gt;
+&lt;/body&gt;</code></p>
+<h2 id="4-四大对象种类"><a href="#4-四大对象种类" class="headerlink" title="4.四大对象种类"></a>4.四大对象种类</h2><p>Beautiful Soup转换后的内容中，每个节点都是Python对象，一共分为四大类：</p>
+<blockquote>
+<p>Tag<br>NavigableString<br>BeautifulSoup<br>Comment</p>
+</blockquote>
+<h3 id="（1）Tag"><a href="#（1）Tag" class="headerlink" title="（1）Tag"></a>（1）Tag</h3><p>Tag就是标签的意思，它和HTML中的标签是一样的吗？我们来具体看下：<br><code>&lt;title&gt;This is title&lt;/title&gt;</code></p>
+<p><code>&lt;p class=&quot;title&quot; name=&quot;name1&quot;&gt;data&lt;/p&gt;</code><br>上面的title、p这些HTML标签加上标签中包含的内容就是Tag<br>那么如何获取这些标签呢，可能你会想到上面好像有调用实例，没错刚刚我们讲到的.语法，就是用来做这个的</p>
+<p>获取body：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">soup.body</div></pre></td></tr></table></figure>
+<p>获取head：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">soup.head</div></pre></td></tr></table></figure>
+<p>获取title：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">soup.title</div></pre></td></tr></table></figure>
+<p>是不是相当方便，这种方式比正则表达式的匹配要简单不是一点半点，大大节省了学习时间和成本,不过这种方式存在一个问题，就是它只能匹配所有内容中第一个符合条件的标签，并不能匹配所有标签。</p>
+<h4 id="Tag的重要属性"><a href="#Tag的重要属性" class="headerlink" title="Tag的重要属性"></a>Tag的重要属性</h4><h5 id="name（标签名称）"><a href="#name（标签名称）" class="headerlink" title="name（标签名称）"></a><1>name（标签名称）</1></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(soup.name)</div></pre></td></tr></table></figure>
+<p>输出：<br><code>[document]</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(soup.title.name)</div></pre></td></tr></table></figure>
+<p>输出：<br><code>title</code></p>
+<h5 id="attrs（类型字典）"><a href="#attrs（类型字典）" class="headerlink" title="attrs（类型字典）"></a><2>attrs（类型字典）</2></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(soup.p.attrs)</div></pre></td></tr></table></figure>
+<p>输出：<br><code>{&#39;class&#39;: [&#39;title&#39;], &#39;name&#39;: &#39;name1&#39;}</code><br>我们可以得到p标签的所有属性，字典类型。<br>这样我们就可以针对性的获取自己想要的内容了。<br>比如想要获取p标签中的class</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(soup.p[&apos;class&apos;])</div></pre></td></tr></table></figure>
+<p>输出：<br><code>[&#39;title&#39;]</code><br>也可以这样获取</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(soup.p.get(&apos;class&apos;))</div></pre></td></tr></table></figure>
+<p>如果需要，我们还可以对属性进行修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">soup.p[&apos;class&apos;] = &apos;class1&apos;</div><div class="line">print(soup.p[&apos;class&apos;])</div></pre></td></tr></table></figure>
+<p>输出：<br><code>&lt;p class=&quot;class1&quot; name=&quot;name1&quot;&gt;data&lt;/p&gt;</code></p>
+<h3 id="（2）NavigableString"><a href="#（2）NavigableString" class="headerlink" title="（2）NavigableString"></a>（2）NavigableString</h3><p>NavigableString字面意思是可以遍历的字符串，它是用来做什么的呢？我们先看个栗子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(soup.p.string)</div></pre></td></tr></table></figure>
+<p>输出：<br><code>data</code><br>我们会发现，上面的Tag获取了标签的全部内容，但是我们真正需要的是标签内部的文字，这个时候，只需要.string就可以轻松拿到文字内容了，获取的这个文字内容类型就是NavigableString<br>OK，我们可以来看下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(type(soup.p.string))</div></pre></td></tr></table></figure></p>
+<p>输出：<br><code>&lt;class &#39;bs4.element.NavigableString&#39;&gt;</code></p>
+<h3 id="（3）BeautifulSoup"><a href="#（3）BeautifulSoup" class="headerlink" title="（3）BeautifulSoup"></a>（3）BeautifulSoup</h3><p>BeautifulSoup获取的是HTML文档的全部内容，我们也可以把它当做一个Tag对象来处理，同样可以使用Tag的name和attrs属性，这里就不举例了</p>
+<h3 id="（4）Comment"><a href="#（4）Comment" class="headerlink" title="（4）Comment"></a>（4）Comment</h3><p>我们先来打印一个标签内的文字：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(soup.a.string)</div></pre></td></tr></table></figure>
+<p>输出：<br><code>注释内容：Baidu</code><br>我们会发现，这个内容是注释的，并不是我们需要的，可是使用.string获取的时候，并没有进行区分，直接给我们返回了注释内容，这可能会对我们爬去的数据制造不必要的麻烦。<br>我们如何才能过滤掉注释内容呢？<br>打印下这段注释内容的类型我们来看下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(type(soup.a.string))</div></pre></td></tr></table></figure>
+<p>输出：<br><code>&lt;class &#39;bs4.element.Comment&#39;&gt;</code><br>打印结果我们发现这个内容的类型并不是NavigableString，而是Comment，既然这样，那就好办了，使用之前我们先对类型进行过滤就可以了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">if type(soup.a.string) == bs4.element.Comment:</div><div class="line">    print(&apos;这是一段注释内容&apos;)</div></pre></td></tr></table></figure>
+<p>输出：<br><code>这是一段注释内容</code></p>
+
       
     </div>
 
@@ -522,7 +597,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#PS-当然完全靠BeautifulSoup去解析匹配数据可能并不能做到十全十美，不过这个完全不用担心，因为BeautifulSoup语法中支持嵌套正则表达式，这样一来，完全所向披靡啊，数据海洋，我来啦"><span class="nav-number">1.</span> <span class="nav-text">PS:当然完全靠BeautifulSoup去解析匹配数据可能并不能做到十全十美，不过这个完全不用担心，因为BeautifulSoup语法中支持嵌套正则表达式，这样一来，完全所向披靡啊，数据海洋，我来啦</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-BeautifulSoup简介"><span class="nav-number"></span> <span class="nav-text">1.BeautifulSoup简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装（Python-2-7-for-Mac）"><span class="nav-number"></span> <span class="nav-text">2.安装（Python 2.7 for Mac）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Beautiful-Soup不只支持HTML解析器，还支持一些三方的解析器，可以根据需要安装相应的库（lxml，xml，html5lib）"><span class="nav-number"></span> <span class="nav-text">Beautiful Soup不只支持HTML解析器，还支持一些三方的解析器，可以根据需要安装相应的库（lxml，xml，html5lib）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Beautiful-Soup-使用"><span class="nav-number"></span> <span class="nav-text">3.Beautiful Soup 使用</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#PS-当然完全靠BeautifulSoup去解析匹配数据可能并不能做到十全十美，不过这个完全不用担心，因为BeautifulSoup语法中支持嵌套正则表达式，这样一来，完全所向披靡啊，数据海洋，我来啦"><span class="nav-number">1.</span> <span class="nav-text">PS:当然完全靠BeautifulSoup去解析匹配数据可能并不能做到十全十美，不过这个完全不用担心，因为BeautifulSoup语法中支持嵌套正则表达式，这样一来，完全所向披靡啊，数据海洋，我来啦</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-BeautifulSoup简介"><span class="nav-number"></span> <span class="nav-text">1.BeautifulSoup简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装（Python-2-7-for-Mac）"><span class="nav-number"></span> <span class="nav-text">2.安装（Python 2.7 for Mac）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Beautiful-Soup不只支持HTML解析器，还支持一些三方的解析器，可以根据需要安装相应的库（lxml，xml，html5lib）"><span class="nav-number"></span> <span class="nav-text">Beautiful Soup不只支持HTML解析器，还支持一些三方的解析器，可以根据需要安装相应的库（lxml，xml，html5lib）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Beautiful-Soup-使用"><span class="nav-number"></span> <span class="nav-text">3.Beautiful Soup 使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-四大对象种类"><span class="nav-number"></span> <span class="nav-text">4.四大对象种类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#（1）Tag"><span class="nav-number"></span> <span class="nav-text">（1）Tag</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Tag的重要属性"><span class="nav-number"></span> <span class="nav-text">Tag的重要属性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#name（标签名称）"><span class="nav-number"></span> <span class="nav-text">name（标签名称）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#attrs（类型字典）"><span class="nav-number"></span> <span class="nav-text">attrs（类型字典）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（2）NavigableString"><span class="nav-number"></span> <span class="nav-text">（2）NavigableString</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（3）BeautifulSoup"><span class="nav-number"></span> <span class="nav-text">（3）BeautifulSoup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（4）Comment"><span class="nav-number"></span> <span class="nav-text">（4）Comment</span></a></div>
             
 
           </div>
