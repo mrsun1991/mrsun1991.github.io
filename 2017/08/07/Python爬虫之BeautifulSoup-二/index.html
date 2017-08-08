@@ -104,7 +104,7 @@
 <meta property="og:url" content="http://layne_sun.coding.me/2017/08/07/Python爬虫之BeautifulSoup-二/index.html">
 <meta property="og:site_name" content="Layne&#39;s Blog">
 <meta property="og:description" content="上篇文章主要讲了关于Beautiful Soup的一些基本用法，这里我们继续聊下关于它的一些详细用法。在实际的使用中，其实我们用的最多的一个对象可能就是Tag了，今天主要也是讲通过使用Tag的各种属性方法来获取我们需要的内容。 1.遍历文档树我们使用HTML内容，构造Beautiful Soup对象 12from BeautifulSoup import soup = BeautifulSoup(">
-<meta property="og:updated_time" content="2017-08-08T07:02:03.000Z">
+<meta property="og:updated_time" content="2017-08-08T07:51:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python爬虫之BeautifulSoup(二)">
 <meta name="twitter:description" content="上篇文章主要讲了关于Beautiful Soup的一些基本用法，这里我们继续聊下关于它的一些详细用法。在实际的使用中，其实我们用的最多的一个对象可能就是Tag了，今天主要也是讲通过使用Tag的各种属性方法来获取我们需要的内容。 1.遍历文档树我们使用HTML内容，构造Beautiful Soup对象 12from BeautifulSoup import soup = BeautifulSoup(">
@@ -427,7 +427,26 @@ html
  &lt;/body&gt;
 &lt;/html&gt;
 </code></pre><p>我们可以看到a、b和c属于同一级别，也就是我们说的它们互为兄弟节点</p>
-<h4 id="next-sibling-和-previous-sibling"><a href="#next-sibling-和-previous-sibling" class="headerlink" title=".next_sibling 和 .previous_sibling"></a>.next_sibling 和 .previous_sibling</h4>
+<h4 id="next-sibling-和-previous-sibling"><a href="#next-sibling-和-previous-sibling" class="headerlink" title=".next_sibling 和 .previous_sibling"></a>.next_sibling 和 .previous_sibling</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">print(sibling_soup.b.previous_sibling)</div><div class="line">print(sibling_soup.b.next_sibling)</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<p>`<a>text1</a></p>
+<p><c>text3</c><br>`</p>
+<p>上面的打印结果我们可以看出.previous_sibling为前一个兄弟节点，.next_sibling 为后一个兄弟节点</p>
+<h5 id="注意：如果并列结构中出现逗号，空格或者换行符等字符分割的话，那获取到的兄弟节点有可能就是这些字符串，因为字符串本身也是节点。"><a href="#注意：如果并列结构中出现逗号，空格或者换行符等字符分割的话，那获取到的兄弟节点有可能就是这些字符串，因为字符串本身也是节点。" class="headerlink" title="注意：如果并列结构中出现逗号，空格或者换行符等字符分割的话，那获取到的兄弟节点有可能就是这些字符串，因为字符串本身也是节点。"></a>注意：如果并列结构中出现逗号，空格或者换行符等字符分割的话，那获取到的兄弟节点有可能就是这些字符串，因为字符串本身也是节点。</h5><h3 id="（7）全部兄弟节点"><a href="#（7）全部兄弟节点" class="headerlink" title="（7）全部兄弟节点"></a>（7）全部兄弟节点</h3><p>通过 .next_siblings 和 .previous_siblings 属性可以对当前节点的兄弟节点迭代输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">for sibling in sibling_soup.a.next_siblings:</div><div class="line">    print(repr(sibling))</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<p>`<b>text2</b></p>
+<p><c>text3</c><br>`</p>
+<h3 id="（8）前后节点（回退和前进）"><a href="#（8）前后节点（回退和前进）" class="headerlink" title="（8）前后节点（回退和前进）"></a>（8）前后节点（回退和前进）</h3><p>可以通过.next_element  .previous_element 属性来获取当前节点的前后节点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(sibling_soup.h.next_element)</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<p><code>&lt;a&gt;text1&lt;/a&gt;</code><br>我们可以看出，前后节点和兄弟节点的不同之处在于，兄弟节点获取的是同一级别中的相邻节点，而前后节点层级不作区分</p>
+<h3 id="（9）所有前后节点"><a href="#（9）所有前后节点" class="headerlink" title="（9）所有前后节点"></a>（9）所有前后节点</h3><p>可以通过.next_elements  .previous_elements 属性来获取当前节点的前后节点,这里获取到的是一个list生成器，可以通过遍历的方式获取所有元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">for element in sibling_soup.h.next_elements:</div><div class="line">    print(element)</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<p>`<a>text1</a><br>text1<br><b>text2</b><br>text2</p>
+<p><c>text3</c><br>text3<br>`</p>
+
       
     </div>
 
@@ -599,7 +618,7 @@ html
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-遍历文档树"><span class="nav-number">1.</span> <span class="nav-text">1.遍历文档树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#（1）子节点"><span class="nav-number">1.1.</span> <span class="nav-text">（1）子节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（2）子孙节点"><span class="nav-number">1.2.</span> <span class="nav-text">（2）子孙节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（3）节点内容"><span class="nav-number">1.3.</span> <span class="nav-text">（3）节点内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（4）多个内容"><span class="nav-number">1.4.</span> <span class="nav-text">（4）多个内容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#string"><span class="nav-number">1.4.1.</span> <span class="nav-text">.string</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#注意：这里遍历获取到的内容并不包含注释"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">注意：这里遍历获取到的内容并不包含注释</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#stripped-strings"><span class="nav-number">1.4.2.</span> <span class="nav-text">.stripped_strings</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（5）父节点"><span class="nav-number">1.5.</span> <span class="nav-text">（5）父节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（6）兄弟节点"><span class="nav-number">1.6.</span> <span class="nav-text">（6）兄弟节点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#next-sibling-和-previous-sibling"><span class="nav-number">1.6.1.</span> <span class="nav-text">.next_sibling 和 .previous_sibling</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-遍历文档树"><span class="nav-number">1.</span> <span class="nav-text">1.遍历文档树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#（1）子节点"><span class="nav-number">1.1.</span> <span class="nav-text">（1）子节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（2）子孙节点"><span class="nav-number">1.2.</span> <span class="nav-text">（2）子孙节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（3）节点内容"><span class="nav-number">1.3.</span> <span class="nav-text">（3）节点内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（4）多个内容"><span class="nav-number">1.4.</span> <span class="nav-text">（4）多个内容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#string"><span class="nav-number">1.4.1.</span> <span class="nav-text">.string</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#注意：这里遍历获取到的内容并不包含注释"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">注意：这里遍历获取到的内容并不包含注释</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#stripped-strings"><span class="nav-number">1.4.2.</span> <span class="nav-text">.stripped_strings</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（5）父节点"><span class="nav-number">1.5.</span> <span class="nav-text">（5）父节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（6）兄弟节点"><span class="nav-number">1.6.</span> <span class="nav-text">（6）兄弟节点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#next-sibling-和-previous-sibling"><span class="nav-number">1.6.1.</span> <span class="nav-text">.next_sibling 和 .previous_sibling</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#注意：如果并列结构中出现逗号，空格或者换行符等字符分割的话，那获取到的兄弟节点有可能就是这些字符串，因为字符串本身也是节点。"><span class="nav-number">1.6.1.1.</span> <span class="nav-text">注意：如果并列结构中出现逗号，空格或者换行符等字符分割的话，那获取到的兄弟节点有可能就是这些字符串，因为字符串本身也是节点。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（7）全部兄弟节点"><span class="nav-number">1.7.</span> <span class="nav-text">（7）全部兄弟节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（8）前后节点（回退和前进）"><span class="nav-number">1.8.</span> <span class="nav-text">（8）前后节点（回退和前进）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（9）所有前后节点"><span class="nav-number">1.9.</span> <span class="nav-text">（9）所有前后节点</span></a></li></ol></li></ol></div>
             
 
           </div>
