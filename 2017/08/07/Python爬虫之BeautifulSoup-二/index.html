@@ -104,7 +104,7 @@
 <meta property="og:url" content="http://layne_sun.coding.me/2017/08/07/Python爬虫之BeautifulSoup-二/index.html">
 <meta property="og:site_name" content="Layne&#39;s Blog">
 <meta property="og:description" content="上篇文章主要讲了关于Beautiful Soup的一些基本用法，这里我们继续聊下关于它的一些详细用法。在实际的使用中，其实我们用的最多的一个对象可能就是Tag了，今天主要也是讲通过使用Tag的各种属性方法来获取我们需要的内容。 1.遍历文档树我们使用HTML内容，构造Beautiful Soup对象 12from BeautifulSoup import soup = BeautifulSoup(">
-<meta property="og:updated_time" content="2017-08-08T06:55:34.000Z">
+<meta property="og:updated_time" content="2017-08-08T06:58:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python爬虫之BeautifulSoup(二)">
 <meta name="twitter:description" content="上篇文章主要讲了关于Beautiful Soup的一些基本用法，这里我们继续聊下关于它的一些详细用法。在实际的使用中，其实我们用的最多的一个对象可能就是Tag了，今天主要也是讲通过使用Tag的各种属性方法来获取我们需要的内容。 1.遍历文档树我们使用HTML内容，构造Beautiful Soup对象 12from BeautifulSoup import soup = BeautifulSoup(">
@@ -376,14 +376,40 @@
 &lt;p class=&quot;title2&quot; name=&quot;name2&quot;&gt;data&lt;/p&gt;
 &lt;a class=&quot;aClass&quot; href=&quot;http://www.baidu.com&quot; id=&quot;link&quot;&gt;&lt;!-- 注释内容：Baidu --&gt;&lt;/a&gt;
 </code></pre><h3 id="（2）子孙节点"><a href="#（2）子孙节点" class="headerlink" title="（2）子孙节点"></a>（2）子孙节点</h3><p>tag的content和children属性仅包含直接tag的子节点,descendants属性可以对所有的子孙节点进行递归循环，它返回的同样是一个list生成器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">for desChild in soup.p.descendants:</div><div class="line">    print(desChild)</div><div class="line">``` </div><div class="line"></div><div class="line">输出：</div><div class="line"></div><div class="line">`&lt;li&gt;data&lt;/li&gt;</div><div class="line">data</div><div class="line">` </div><div class="line"></div><div class="line">从输出结果我们可以看到，所有的子节点内容会被一层一层的剥离出来。</div><div class="line">### （3）节点内容</div><div class="line">如果tag只有一个 NavigableString 类型子节点,那么这个tag可以使用 .string 得到子节点:</div></pre></td></tr></table></figure>
-<p>print(soup.title.string)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">输出：</div><div class="line"></div><div class="line">`This is title`</div><div class="line"></div><div class="line">如果一个tag仅有一个子节点,那么这个tag也可以使用 .string 方法,输出结果与当前唯一子节点的 .string 结果相同:</div></pre></td></tr></table></figure></p>
-<p>print(soup.p.string)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">输出：</div><div class="line"></div><div class="line">`data`</div><div class="line"></div><div class="line">### （4）多个内容</div><div class="line">#### .string</div><div class="line">beautiful soup提供了获取多个内容的属性方法.strings,获取的是一个list生成器，我们可以通过遍历去获取内容</div></pre></td></tr></table></figure></p>
-<p>for str in soup.strings:<br>    print(str)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">输出：</div><div class="line">This is title</div><div class="line">data</div><div class="line">data</div><div class="line">##### 注意：这里遍历获取到的内容并不包含注释</div><div class="line">#### .stripped_strings </div><div class="line">通过.strings获取到的内容可能会包含很多空格或换行符，使用.stripped_strings可以去除这些无用的空白字符</div><div class="line">### （5）父节点</div><div class="line">通过.parent属性，我们可以获取到任意tag或者字符串的父节点</div></pre></td></tr></table></figure></p>
-<p>print(soup.title.parent)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">输出：</div><div class="line"></div><div class="line">`&lt;head&gt;&lt;title&gt;This is title&lt;/title&gt;&lt;/head&gt;`</div></pre></td></tr></table></figure></p>
-<p>print(soup.li.parent)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">输出：</div><div class="line"></div><div class="line">`&lt;p class=&quot;title&quot; name=&quot;name1&quot;&gt;&lt;li&gt;data&lt;/li&gt;&lt;/p&gt;</div><div class="line">`</div><div class="line"></div><div class="line">输出结果我们可以看到，.parent可以获得父节点的全部内容</div><div class="line"></div><div class="line">通过.parents可以获取所有父节点的内容</div></pre></td></tr></table></figure></p>
-<p>for per in soup.title.parents:<br>    if per is None:<br>        print(per)<br>    else:<br>        print(per.name)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">输出：</div><div class="line"></div><div class="line">`head</div><div class="line">html</div><div class="line">[document]</div><div class="line">`</div><div class="line"></div><div class="line">### （6）兄弟节点</div><div class="line">为了更方便的打印兄弟节点的关系，我们来构造一个新的beautiful soup对象</div></pre></td></tr></table></figure></p>
-<p>sibling_soup = BeautifulSoup(“<h><a>text1</a><b>text2</b><c>text3</c></h>“,”lxml”)<br>print(sibling_soup.prettify())<br>```</p>
+<pre><code>for desChild in soup.p.descendants:
+    print(desChild)
+</code></pre><p>输出：</p>
+<p><code>&lt;li&gt;data&lt;/li&gt;
+data</code> </p>
+<p>从输出结果我们可以看到，所有的子节点内容会被一层一层的剥离出来。</p>
+<h3 id="（3）节点内容"><a href="#（3）节点内容" class="headerlink" title="（3）节点内容"></a>（3）节点内容</h3><p>如果tag只有一个 NavigableString 类型子节点,那么这个tag可以使用 .string 得到子节点:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(soup.title.string)</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<p><code>This is title</code></p>
+<p>如果一个tag仅有一个子节点,那么这个tag也可以使用 .string 方法,输出结果与当前唯一子节点的 .string 结果相同:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(soup.p.string)</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<p><code>data</code></p>
+<h3 id="（4）多个内容"><a href="#（4）多个内容" class="headerlink" title="（4）多个内容"></a>（4）多个内容</h3><h4 id="string"><a href="#string" class="headerlink" title=".string"></a>.string</h4><p>beautiful soup提供了获取多个内容的属性方法.strings,获取的是一个list生成器，我们可以通过遍历去获取内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">for str in soup.strings:</div><div class="line">    print(str)</div></pre></td></tr></table></figure>
+<p>输出：<br>This is title<br>data<br>data</p>
+<h5 id="注意：这里遍历获取到的内容并不包含注释"><a href="#注意：这里遍历获取到的内容并不包含注释" class="headerlink" title="注意：这里遍历获取到的内容并不包含注释"></a>注意：这里遍历获取到的内容并不包含注释</h5><h4 id="stripped-strings"><a href="#stripped-strings" class="headerlink" title=".stripped_strings"></a>.stripped_strings</h4><p>通过.strings获取到的内容可能会包含很多空格或换行符，使用.stripped_strings可以去除这些无用的空白字符</p>
+<h3 id="（5）父节点"><a href="#（5）父节点" class="headerlink" title="（5）父节点"></a>（5）父节点</h3><p>通过.parent属性，我们可以获取到任意tag或者字符串的父节点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(soup.title.parent)</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<p><code>&lt;head&gt;&lt;title&gt;This is title&lt;/title&gt;&lt;/head&gt;</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(soup.li.parent)</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<p><code>&lt;p class=&quot;title&quot; name=&quot;name1&quot;&gt;&lt;li&gt;data&lt;/li&gt;&lt;/p&gt;</code></p>
+<p>输出结果我们可以看到，.parent可以获得父节点的全部内容</p>
+<p>通过.parents可以获取所有父节点的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">for per in soup.title.parents:</div><div class="line">    if per is None:</div><div class="line">        print(per)</div><div class="line">    else:</div><div class="line">        print(per.name)</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<p><code>head
+html
+[document]</code></p>
+<h3 id="（6）兄弟节点"><a href="#（6）兄弟节点" class="headerlink" title="（6）兄弟节点"></a>（6）兄弟节点</h3><p>为了更方便的打印兄弟节点的关系，我们来构造一个新的beautiful soup对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sibling_soup = BeautifulSoup(&quot;&lt;h&gt;&lt;a&gt;text1&lt;/a&gt;&lt;b&gt;text2&lt;/b&gt;&lt;c&gt;text3&lt;/c&gt;&lt;/h&gt;&quot;,&quot;lxml&quot;)</div><div class="line">print(sibling_soup.prettify())</div></pre></td></tr></table></figure>
 <p>格式化输出：</p>
 <p><code>&lt;html&gt;
  &lt;body&gt;
@@ -573,7 +599,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-遍历文档树"><span class="nav-number">1.</span> <span class="nav-text">1.遍历文档树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#（1）子节点"><span class="nav-number">1.1.</span> <span class="nav-text">（1）子节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（2）子孙节点"><span class="nav-number">1.2.</span> <span class="nav-text">（2）子孙节点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#next-sibling-和-previous-sibling"><span class="nav-number">1.2.1.</span> <span class="nav-text">.next_sibling 和 .previous_sibling</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-遍历文档树"><span class="nav-number">1.</span> <span class="nav-text">1.遍历文档树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#（1）子节点"><span class="nav-number">1.1.</span> <span class="nav-text">（1）子节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（2）子孙节点"><span class="nav-number">1.2.</span> <span class="nav-text">（2）子孙节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（3）节点内容"><span class="nav-number">1.3.</span> <span class="nav-text">（3）节点内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（4）多个内容"><span class="nav-number">1.4.</span> <span class="nav-text">（4）多个内容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#string"><span class="nav-number">1.4.1.</span> <span class="nav-text">.string</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#注意：这里遍历获取到的内容并不包含注释"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">注意：这里遍历获取到的内容并不包含注释</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#stripped-strings"><span class="nav-number">1.4.2.</span> <span class="nav-text">.stripped_strings</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（5）父节点"><span class="nav-number">1.5.</span> <span class="nav-text">（5）父节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（6）兄弟节点"><span class="nav-number">1.6.</span> <span class="nav-text">（6）兄弟节点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#next-sibling-和-previous-sibling"><span class="nav-number">1.6.1.</span> <span class="nav-text">.next_sibling 和 .previous_sibling</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
