@@ -81,7 +81,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="-Python -爬虫 -BeautifulSoup," />
 
 
 
@@ -97,13 +97,17 @@
 
 
 
+<meta name="description" content="上篇文章主要讲了关于Beautiful Soup的一些基本用法，这里我们继续聊下关于它的一些详细用法。在实际的使用中，其实我们用的最多的一个对象可能就是Tag了，今天主要也是讲通过使用Tag的各种属性方法来获取我们需要的内容。 1.遍历文档树我们使用HTML内容，构造Beautiful Soup对象12from BeautifulSoup import soup = BeautifulSoup(&amp;">
+<meta name="keywords" content="-Python -爬虫 -BeautifulSoup">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python爬虫之BeautifulSoup(二)">
 <meta property="og:url" content="http://layne_sun.coding.me/2017/08/07/Python爬虫之BeautifulSoup-二/index.html">
 <meta property="og:site_name" content="Layne&#39;s Blog">
-<meta property="og:updated_time" content="2017-08-07T09:23:18.000Z">
+<meta property="og:description" content="上篇文章主要讲了关于Beautiful Soup的一些基本用法，这里我们继续聊下关于它的一些详细用法。在实际的使用中，其实我们用的最多的一个对象可能就是Tag了，今天主要也是讲通过使用Tag的各种属性方法来获取我们需要的内容。 1.遍历文档树我们使用HTML内容，构造Beautiful Soup对象12from BeautifulSoup import soup = BeautifulSoup(&amp;">
+<meta property="og:updated_time" content="2017-08-08T06:39:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python爬虫之BeautifulSoup(二)">
+<meta name="twitter:description" content="上篇文章主要讲了关于Beautiful Soup的一些基本用法，这里我们继续聊下关于它的一些详细用法。在实际的使用中，其实我们用的最多的一个对象可能就是Tag了，今天主要也是讲通过使用Tag的各种属性方法来获取我们需要的内容。 1.遍历文档树我们使用HTML内容，构造Beautiful Soup对象12from BeautifulSoup import soup = BeautifulSoup(&amp;">
 
 
 
@@ -341,7 +345,40 @@
       
 
       
-        
+        <p>上篇文章主要讲了关于Beautiful Soup的一些基本用法，这里我们继续聊下关于它的一些详细用法。在实际的使用中，其实我们用的最多的一个对象可能就是Tag了，今天主要也是讲通过使用Tag的各种属性方法来获取我们需要的内容。</p>
+<h2 id="1-遍历文档树"><a href="#1-遍历文档树" class="headerlink" title="1.遍历文档树"></a>1.遍历文档树</h2><p>我们使用HTML内容，构造Beautiful Soup对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">from BeautifulSoup import </div><div class="line">soup = BeautifulSoup(&quot;&quot;&quot;&lt;html&gt;&lt;head&gt;&lt;title&gt;This is title&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;p class=&quot;title&quot; name=&quot;name1&quot;&gt;&lt;li&gt;data&lt;/li&gt;&lt;/p&gt;&lt;p class=&quot;title2&quot; name=&quot;name2&quot;&gt;data&lt;/p&gt;&lt;a class=&quot;aClass&quot; href=&quot;http://www.baidu.com&quot; id=&quot;link&quot;&gt;&lt;!-- 注释内容：Baidu --&gt;&lt;/a&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="（1）子节点"><a href="#（1）子节点" class="headerlink" title="（1）子节点"></a>（1）子节点</h3><p>注意这里的子节点，都是指Tag的子节点，字符串节点是没有子节点的。</p>
+<ul>
+<li>contents</li>
+</ul>
+<p>其中tag的.content属性，可以将tag的子节点以列表的形式输出<br>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(soup.p.contents)</div></pre></td></tr></table></figure>
+<p>输出：<br><code>[&lt;li&gt;data&lt;/li&gt;]</code><br>既然获取到的是一个列表，那我们就可以用索引的方式去获取想要的内容了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(soup.p.contents[0])</div></pre></td></tr></table></figure>
+<p>输出：<br><code>&lt;li&gt;data&lt;/li&gt;</code></p>
+<ul>
+<li><p>children</p>
+<p>tag的.children返回的是一个list生成器对象<br>我们打印下看看输出内容：</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(soup.body.children)</div></pre></td></tr></table></figure>
+<p>输出：<br><code>&lt;list_iterator object at 0x106a10550&gt;</code><br>既然children返回的是list生成器，那我们可以通过<br>可以通过for循环遍历来获取内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">for child in soup.body.children:</div><div class="line">    print(child)</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<p>`<list_iterator object="" at="" 0x10a21ae80=""></list_iterator></p>
+<p></p><p class="title" name="name1"><li>data</li></p><p></p>
+<p></p><p class="title2" name="name2">data</p><br><a class="aClass" href="http://www.baidu.com" id="link" target="_blank" rel="external"><!-- 注释内容：Baidu --></a><br>`<p></p>
+<h3 id="（2）子孙节点"><a href="#（2）子孙节点" class="headerlink" title="（2）子孙节点"></a>（2）子孙节点</h3><p>tag的content和children属性仅包含直接tag的子节点,descendants属性可以对所有的子孙节点进行递归循环，它返回的同样是一个list生成器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">for desChild in soup.p.descendants:</div><div class="line">    print(desChild)</div><div class="line">``` </div><div class="line">输出：</div><div class="line">`&lt;li&gt;data&lt;/li&gt;</div><div class="line">data</div><div class="line">` </div><div class="line">从输出结果我们可以看到，所有的子节点内容会被一层一层的剥离出来。</div><div class="line">### （3）节点内容</div><div class="line">如果tag只有一个 NavigableString 类型子节点,那么这个tag可以使用 .string 得到子节点:</div></pre></td></tr></table></figure>
+<p>print(soup.title.string)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">输出：</div><div class="line">`This is title`</div><div class="line"></div><div class="line">如果一个tag仅有一个子节点,那么这个tag也可以使用 .string 方法,输出结果与当前唯一子节点的 .string 结果相同:</div></pre></td></tr></table></figure></p>
+<p>print(soup.p.string)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">输出：</div><div class="line">`data`</div><div class="line"></div><div class="line">### （4）多个内容</div><div class="line">#### .string</div><div class="line">beautiful soup提供了获取多个内容的属性方法.strings,获取的是一个list生成器，我们可以通过遍历去获取内容</div></pre></td></tr></table></figure></p>
+<p>for str in soup.strings:<br>    print(str)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">输出：</div><div class="line">This is title</div><div class="line">data</div><div class="line">data</div><div class="line">##### 注意：这里遍历获取到的内容并不包含注释</div><div class="line">#### .stripped_strings </div><div class="line">通过.strings获取到的内容可能会包含很多空格或换行符，使用.stripped_strings可以去除这些无用的空白字符</div><div class="line">### （5）父节点</div><div class="line">通过.parent属性，我们可以获取到任意tag或者字符串的父节点</div></pre></td></tr></table></figure></p>
+<p>print(soup.title.parent)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">输出：</div><div class="line">`&lt;head&gt;&lt;title&gt;This is title&lt;/title&gt;&lt;/head&gt;`</div></pre></td></tr></table></figure></p>
+<p>print(soup.li.parent)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">输出：</div><div class="line">`&lt;p class=&quot;title&quot; name=&quot;name1&quot;&gt;&lt;li&gt;data&lt;/li&gt;&lt;/p&gt;</div><div class="line">`</div><div class="line">输出结果我们可以看到，.parent可以获得父节点的全部内容</div><div class="line"></div><div class="line">通过.parents可以获取所有父节点的内容</div></pre></td></tr></table></figure></p>
+<p>for per in soup.title.parents:<br>    if per is None:<br>        print(per)<br>    else:<br>        print(per.name)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">输出：</div><div class="line">`head</div><div class="line">html</div><div class="line">[document]</div><div class="line">`</div><div class="line">### （6）兄弟节点</div><div class="line">为了更方便的打印兄弟节点的关系，我们来构造一个新的beautiful soup对象</div></pre></td></tr></table></figure></p>
+<p>sibling_soup = BeautifulSoup(“<h><a>text1</a><b>text2</b><c>text3</c></h>“,”lxml”)<br>print(sibling_soup.prettify())<br><code>``
+格式化输出：</code><html><br> <body><br>  <h><br>   <a><br>    text1<br>   </a><br>   <b><br>    text2<br>   </b><br>   <c><br>    text3<br>   </c><br>  </h><br> </body><br></html><br>`我们可以看到a、b和c属于同一级别，也就是我们说的它们互为兄弟节点</p>
+<h4 id="next-sibling-和-previous-sibling"><a href="#next-sibling-和-previous-sibling" class="headerlink" title=".next_sibling 和 .previous_sibling"></a>.next_sibling 和 .previous_sibling</h4>
       
     </div>
 
@@ -367,6 +404,12 @@
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python-爬虫-BeautifulSoup/" rel="tag"># -Python -爬虫 -BeautifulSoup</a>
+          
+        </div>
       
 
       
@@ -434,8 +477,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://ws4.sinaimg.cn/large/006tNbRwly1fgnhf039goj30tt0tyn6o.jpg"
@@ -488,6 +540,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-遍历文档树"><span class="nav-number">1.</span> <span class="nav-text">1.遍历文档树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#（1）子节点"><span class="nav-number">1.1.</span> <span class="nav-text">（1）子节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（2）子孙节点"><span class="nav-number">1.2.</span> <span class="nav-text">（2）子孙节点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#next-sibling-和-previous-sibling"><span class="nav-number">1.2.1.</span> <span class="nav-text">.next_sibling 和 .previous_sibling</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
