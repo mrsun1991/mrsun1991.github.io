@@ -104,7 +104,7 @@
 <meta property="og:url" content="http://layne_sun.coding.me/2017/08/07/Python爬虫之BeautifulSoup-二/index.html">
 <meta property="og:site_name" content="Layne&#39;s Blog">
 <meta property="og:description" content="上篇文章主要讲了关于Beautiful Soup的一些基本用法，这里我们继续聊下关于它的一些详细用法。在实际的使用中，其实我们用的最多的一个对象可能就是Tag了，今天主要也是讲通过使用Tag的各种属性方法来获取我们需要的内容。 1.遍历文档树我们使用HTML内容，构造Beautiful Soup对象12from BeautifulSoup import soup = BeautifulSoup(&amp;">
-<meta property="og:updated_time" content="2017-08-08T06:39:46.000Z">
+<meta property="og:updated_time" content="2017-08-08T06:41:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python爬虫之BeautifulSoup(二)">
 <meta name="twitter:description" content="上篇文章主要讲了关于Beautiful Soup的一些基本用法，这里我们继续聊下关于它的一些详细用法。在实际的使用中，其实我们用的最多的一个对象可能就是Tag了，今天主要也是讲通过使用Tag的各种属性方法来获取我们需要的内容。 1.遍历文档树我们使用HTML内容，构造Beautiful Soup对象12from BeautifulSoup import soup = BeautifulSoup(&amp;">
@@ -376,8 +376,23 @@
 <p>print(soup.title.parent)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">输出：</div><div class="line">`&lt;head&gt;&lt;title&gt;This is title&lt;/title&gt;&lt;/head&gt;`</div></pre></td></tr></table></figure></p>
 <p>print(soup.li.parent)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">输出：</div><div class="line">`&lt;p class=&quot;title&quot; name=&quot;name1&quot;&gt;&lt;li&gt;data&lt;/li&gt;&lt;/p&gt;</div><div class="line">`</div><div class="line">输出结果我们可以看到，.parent可以获得父节点的全部内容</div><div class="line"></div><div class="line">通过.parents可以获取所有父节点的内容</div></pre></td></tr></table></figure></p>
 <p>for per in soup.title.parents:<br>    if per is None:<br>        print(per)<br>    else:<br>        print(per.name)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">输出：</div><div class="line">`head</div><div class="line">html</div><div class="line">[document]</div><div class="line">`</div><div class="line">### （6）兄弟节点</div><div class="line">为了更方便的打印兄弟节点的关系，我们来构造一个新的beautiful soup对象</div></pre></td></tr></table></figure></p>
-<p>sibling_soup = BeautifulSoup(“<h><a>text1</a><b>text2</b><c>text3</c></h>“,”lxml”)<br>print(sibling_soup.prettify())<br><code>``
-格式化输出：</code><html><br> <body><br>  <h><br>   <a><br>    text1<br>   </a><br>   <b><br>    text2<br>   </b><br>   <c><br>    text3<br>   </c><br>  </h><br> </body><br></html><br>`我们可以看到a、b和c属于同一级别，也就是我们说的它们互为兄弟节点</p>
+<p>sibling_soup = BeautifulSoup(“<h><a>text1</a><b>text2</b><c>text3</c></h>“,”lxml”)<br>print(sibling_soup.prettify())<br>```<br>格式化输出：</p>
+<p><code>&lt;html&gt;
+ &lt;body&gt;
+  &lt;h&gt;
+   &lt;a&gt;
+    text1
+   &lt;/a&gt;
+   &lt;b&gt;
+    text2
+   &lt;/b&gt;
+   &lt;c&gt;
+    text3
+   &lt;/c&gt;
+  &lt;/h&gt;
+ &lt;/body&gt;
+&lt;/html&gt;</code></p>
+<p>我们可以看到a、b和c属于同一级别，也就是我们说的它们互为兄弟节点</p>
 <h4 id="next-sibling-和-previous-sibling"><a href="#next-sibling-和-previous-sibling" class="headerlink" title=".next_sibling 和 .previous_sibling"></a>.next_sibling 和 .previous_sibling</h4>
       
     </div>
