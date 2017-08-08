@@ -104,7 +104,7 @@
 <meta property="og:url" content="http://layne_sun.coding.me/2017/08/07/Python爬虫之BeautifulSoup-二/index.html">
 <meta property="og:site_name" content="Layne&#39;s Blog">
 <meta property="og:description" content="上篇文章主要讲了关于Beautiful Soup的一些基本用法，这里我们继续聊下关于它的一些详细用法。在实际的使用中，其实我们用的最多的一个对象可能就是Tag了，今天主要也是讲通过使用Tag的各种属性方法来获取我们需要的内容。 1.遍历文档树我们使用HTML内容，构造Beautiful Soup对象 12from BeautifulSoup import soup = BeautifulSoup(">
-<meta property="og:updated_time" content="2017-08-08T06:51:02.000Z">
+<meta property="og:updated_time" content="2017-08-08T06:55:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python爬虫之BeautifulSoup(二)">
 <meta name="twitter:description" content="上篇文章主要讲了关于Beautiful Soup的一些基本用法，这里我们继续聊下关于它的一些详细用法。在实际的使用中，其实我们用的最多的一个对象可能就是Tag了，今天主要也是讲通过使用Tag的各种属性方法来获取我们需要的内容。 1.遍历文档树我们使用HTML内容，构造Beautiful Soup对象 12from BeautifulSoup import soup = BeautifulSoup(">
@@ -371,10 +371,11 @@
 <p>既然children返回的是list生成器，那我们可以通过<br>可以通过for循环遍历来获取内容：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">for child in soup.body.children:</div><div class="line">    print(child)</div></pre></td></tr></table></figure>
 <p>输出：</p>
-<p>`<list_iterator object="" at="" 0x10a21ae80=""></list_iterator></p>
-<p></p><p class="title" name="name1"><li>data</li></p><p></p>
-<p></p><p class="title2" name="name2">data</p><br><a class="aClass" href="http://www.baidu.com" id="link" target="_blank" rel="external"><!-- 注释内容：Baidu --></a><br>`<p></p>
-<h3 id="（2）子孙节点"><a href="#（2）子孙节点" class="headerlink" title="（2）子孙节点"></a>（2）子孙节点</h3><p>tag的content和children属性仅包含直接tag的子节点,descendants属性可以对所有的子孙节点进行递归循环，它返回的同样是一个list生成器</p>
+<pre><code>&lt;list_iterator object at 0x10a21ae80&gt;
+&lt;p class=&quot;title&quot; name=&quot;name1&quot;&gt;&lt;li&gt;data&lt;/li&gt;&lt;/p&gt;
+&lt;p class=&quot;title2&quot; name=&quot;name2&quot;&gt;data&lt;/p&gt;
+&lt;a class=&quot;aClass&quot; href=&quot;http://www.baidu.com&quot; id=&quot;link&quot;&gt;&lt;!-- 注释内容：Baidu --&gt;&lt;/a&gt;
+</code></pre><h3 id="（2）子孙节点"><a href="#（2）子孙节点" class="headerlink" title="（2）子孙节点"></a>（2）子孙节点</h3><p>tag的content和children属性仅包含直接tag的子节点,descendants属性可以对所有的子孙节点进行递归循环，它返回的同样是一个list生成器</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">for desChild in soup.p.descendants:</div><div class="line">    print(desChild)</div><div class="line">``` </div><div class="line"></div><div class="line">输出：</div><div class="line"></div><div class="line">`&lt;li&gt;data&lt;/li&gt;</div><div class="line">data</div><div class="line">` </div><div class="line"></div><div class="line">从输出结果我们可以看到，所有的子节点内容会被一层一层的剥离出来。</div><div class="line">### （3）节点内容</div><div class="line">如果tag只有一个 NavigableString 类型子节点,那么这个tag可以使用 .string 得到子节点:</div></pre></td></tr></table></figure>
 <p>print(soup.title.string)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">输出：</div><div class="line"></div><div class="line">`This is title`</div><div class="line"></div><div class="line">如果一个tag仅有一个子节点,那么这个tag也可以使用 .string 方法,输出结果与当前唯一子节点的 .string 结果相同:</div></pre></td></tr></table></figure></p>
 <p>print(soup.p.string)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">输出：</div><div class="line"></div><div class="line">`data`</div><div class="line"></div><div class="line">### （4）多个内容</div><div class="line">#### .string</div><div class="line">beautiful soup提供了获取多个内容的属性方法.strings,获取的是一个list生成器，我们可以通过遍历去获取内容</div></pre></td></tr></table></figure></p>
