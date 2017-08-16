@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Layne&#39;s Blog">
 <meta property="og:description" content="NumPy是Python科学计算的基础包。它提供了多维数组对象、基于数组的各种派生对象（例如，masked Array, 矩阵）。除此之外，还提供了各种各样的加快数组操作的例程，包括数学基本计算、逻辑、图形操作、排序、选择、输入输出，离散傅立叶变换、基础线性代数、基础统计操作、随机仿真等等。本篇文章主要讲一些Numpy的基础用法。 1.属性首先创建一个numpy对象： 123456array =">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1fikeo8xarbj30ls0c90tn.jpg">
-<meta property="og:updated_time" content="2017-08-16T09:01:23.000Z">
+<meta property="og:updated_time" content="2017-08-16T09:06:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="新手学习Numpy">
 <meta name="twitter:description" content="NumPy是Python科学计算的基础包。它提供了多维数组对象、基于数组的各种派生对象（例如，masked Array, 矩阵）。除此之外，还提供了各种各样的加快数组操作的例程，包括数学基本计算、逻辑、图形操作、排序、选择、输入输出，离散傅立叶变换、基础线性代数、基础统计操作、随机仿真等等。本篇文章主要讲一些Numpy的基础用法。 1.属性首先创建一个numpy对象： 123456array =">
@@ -364,28 +364,36 @@
 <p> Numpy数据类型：<br><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fikeo8xarbj30ls0c90tn.jpg" alt=""></p>
 <p>说道数据类型的，我们来看下它的类型转换（astype）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">print(a.dtype)</div><div class="line">a = a.astype(np.float32)</div><div class="line">print(a.dtype)</div><div class="line">print(a)</div></pre></td></tr></table></figure>
-<p>输出：<br><code>int64
+<p>输出：</p>
+<pre><code>int64
 float32
 [[  2.  23.   4.]
- [  2.  32.   4.]]</code><br>可以看到，通过astype()函数，就把a的数据类型由int转换为了float32</p>
+ [  2.  32.   4.]]
+</code></pre><p>可以看到，通过astype()函数，就把a的数据类型由int转换为了float32</p>
 <h4 id="定义全部为0的矩阵："><a href="#定义全部为0的矩阵：" class="headerlink" title="定义全部为0的矩阵："></a>定义全部为0的矩阵：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">zero = np.zeros((3,4))</div><div class="line">print(zero)</div></pre></td></tr></table></figure>
-<p>输出（3x4）：<br><code>[[ 0.  0.  0.  0.]
+<p>输出（3x4）：</p>
+<pre><code>[[ 0.  0.  0.  0.]
  [ 0.  0.  0.  0.]
- [ 0.  0.  0.  0.]]</code></p>
-<h4 id="定义全部为1的矩阵："><a href="#定义全部为1的矩阵：" class="headerlink" title="定义全部为1的矩阵："></a>定义全部为1的矩阵：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">one = np.ones((5,6),int)</div><div class="line">print(one)</div></pre></td></tr></table></figure>
-<p>输出（2x3）：<br><code>[[1 1 1]
- [1 1 1]]</code></p>
-<h4 id="定义有序矩阵"><a href="#定义有序矩阵" class="headerlink" title="定义有序矩阵"></a>定义有序矩阵</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">arange = np.arange(10,20,3)</div><div class="line">print(arange)</div></pre></td></tr></table></figure>
-<p>输出（从10到20，步进为3的矩阵）：<br><code>[10 13 16 19]</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">aran = np.arange(0,12).reshape((3,4))</div><div class="line">print(aran)</div></pre></td></tr></table></figure>
-<p>输出（0~11的3x4阶矩阵）：<br><code>[[ 0  1  2  3]
+ [ 0.  0.  0.  0.]]
+</code></pre><h4 id="定义全部为1的矩阵："><a href="#定义全部为1的矩阵：" class="headerlink" title="定义全部为1的矩阵："></a>定义全部为1的矩阵：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">one = np.ones((5,6),int)</div><div class="line">print(one)</div></pre></td></tr></table></figure>
+<p>输出（2x3）：</p>
+<pre><code>[[1 1 1]
+ [1 1 1]]
+</code></pre><h4 id="定义有序矩阵"><a href="#定义有序矩阵" class="headerlink" title="定义有序矩阵"></a>定义有序矩阵</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">arange = np.arange(10,20,3)</div><div class="line">print(arange)</div></pre></td></tr></table></figure>
+<p>输出（从10到20，步进为3的矩阵）：</p>
+<pre><code>[10 13 16 19]
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">aran = np.arange(0,12).reshape((3,4))</div><div class="line">print(aran)</div></pre></td></tr></table></figure>
+<p>输出（0~11的3x4阶矩阵）：</p>
+<pre><code>[[ 0  1  2  3]
  [ 4  5  6  7]
- [ 8  9 10 11]]</code></p>
-<h6 id="注意：这里的arange（）中参数为前闭后开区间，即包含起始值，不包含结尾值；并且这个区间的定义一定要完全等于你定义的矩阵所需要的值"><a href="#注意：这里的arange（）中参数为前闭后开区间，即包含起始值，不包含结尾值；并且这个区间的定义一定要完全等于你定义的矩阵所需要的值" class="headerlink" title="注意：这里的arange（）中参数为前闭后开区间，即包含起始值，不包含结尾值；并且这个区间的定义一定要完全等于你定义的矩阵所需要的值"></a>注意：这里的arange（）中参数为前闭后开区间，即包含起始值，不包含结尾值；并且这个区间的定义一定要完全等于你定义的矩阵所需要的值</h6><h4 id="等差矩阵"><a href="#等差矩阵" class="headerlink" title="等差矩阵"></a>等差矩阵</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">line= line= np.linspace(1,10,4,dtype=int).reshape(2,2)</div><div class="line">print(line)</div></pre></td></tr></table></figure>
-<p>输出（1~10分为4段的2x2矩阵，注意如果不定义几段的话，会默认分成50段）：<br><code>[[ 1  4]
- [ 7 10]]</code></p>
-<h2 id="3-Numpy的基本运算"><a href="#3-Numpy的基本运算" class="headerlink" title="3.Numpy的基本运算"></a>3.Numpy的基本运算</h2><h4 id="加减乘除"><a href="#加减乘除" class="headerlink" title="加减乘除"></a>加减乘除</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">a = np.array([[10,20],</div><div class="line">              [30,40]])</div><div class="line">b = np.arange(1,5).reshape(2,2)</div><div class="line">print(a)</div><div class="line">print(b)</div><div class="line">c = a + b</div><div class="line">d = a - b</div><div class="line">e = a * b</div><div class="line">f = a / b</div><div class="line"></div><div class="line">print(c)</div><div class="line">print(d)</div><div class="line">print(e)</div><div class="line">print(f)</div></pre></td></tr></table></figure>
-<p>输出：<br><code>[[10 20]
+ [ 8  9 10 11]]
+</code></pre><h6 id="注意：这里的arange（）中参数为前闭后开区间，即包含起始值，不包含结尾值；并且这个区间的定义一定要完全等于你定义的矩阵所需要的值"><a href="#注意：这里的arange（）中参数为前闭后开区间，即包含起始值，不包含结尾值；并且这个区间的定义一定要完全等于你定义的矩阵所需要的值" class="headerlink" title="注意：这里的arange（）中参数为前闭后开区间，即包含起始值，不包含结尾值；并且这个区间的定义一定要完全等于你定义的矩阵所需要的值"></a>注意：这里的arange（）中参数为前闭后开区间，即包含起始值，不包含结尾值；并且这个区间的定义一定要完全等于你定义的矩阵所需要的值</h6><h4 id="等差矩阵"><a href="#等差矩阵" class="headerlink" title="等差矩阵"></a>等差矩阵</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">line= line= np.linspace(1,10,4,dtype=int).reshape(2,2)</div><div class="line">print(line)</div></pre></td></tr></table></figure>
+<p>输出（1~10分为4段的2x2矩阵，注意如果不定义几段的话，会默认分成50段）：</p>
+<pre><code>[[ 1  4]
+ [ 7 10]]
+</code></pre><h2 id="3-Numpy的基本运算"><a href="#3-Numpy的基本运算" class="headerlink" title="3.Numpy的基本运算"></a>3.Numpy的基本运算</h2><h4 id="加减乘除"><a href="#加减乘除" class="headerlink" title="加减乘除"></a>加减乘除</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">a = np.array([[10,20],</div><div class="line">              [30,40]])</div><div class="line">b = np.arange(1,5).reshape(2,2)</div><div class="line">print(a)</div><div class="line">print(b)</div><div class="line">c = a + b</div><div class="line">d = a - b</div><div class="line">e = a * b</div><div class="line">f = a / b</div><div class="line"></div><div class="line">print(c)</div><div class="line">print(d)</div><div class="line">print(e)</div><div class="line">print(f)</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<pre><code>[[10 20]
  [30 40]]
 [[1 2]
  [3 4]]
@@ -396,36 +404,44 @@ float32
 [[ 10  40]
  [ 90 160]]
 [[ 10.  10.]
- [ 10.  10.]]</code></p>
-<h5 id="矩阵乘法（矩阵乘法）"><a href="#矩阵乘法（矩阵乘法）" class="headerlink" title="矩阵乘法（矩阵乘法）"></a>矩阵乘法（矩阵乘法）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">c_dot = np.dot(a,b)</div><div class="line">print(c_dot)</div></pre></td></tr></table></figure>
+ [ 10.  10.]]
+</code></pre><h5 id="矩阵乘法（矩阵乘法）"><a href="#矩阵乘法（矩阵乘法）" class="headerlink" title="矩阵乘法（矩阵乘法）"></a>矩阵乘法（矩阵乘法）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">c_dot = np.dot(a,b)</div><div class="line">print(c_dot)</div></pre></td></tr></table></figure>
 <p>上面的矩阵乘法也可以这样写：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">a.dot(b)</div></pre></td></tr></table></figure>
-<p>输出：<br><code>[[ 70 100]
- [150 220]]</code></p>
-<h4 id="乘方"><a href="#乘方" class="headerlink" title="乘方(**)"></a>乘方(**)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(b**3)</div></pre></td></tr></table></figure>
-<p>输出（b矩阵的3次方）：<br><code>[ 1  8 27 64]</code></p>
-<h4 id="三角函数-sin-cos-tan…"><a href="#三角函数-sin-cos-tan…" class="headerlink" title="三角函数(sin/cos/tan…)"></a>三角函数(sin/cos/tan…)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">np.sin(b)</div><div class="line">np.cos(b)</div><div class="line">np.tan(b)</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<pre><code>[[ 70 100]
+ [150 220]]
+</code></pre><h4 id="乘方"><a href="#乘方" class="headerlink" title="乘方(**)"></a>乘方(**)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(b**3)</div></pre></td></tr></table></figure>
+<p>输出（b矩阵的3次方）：</p>
+<pre><code>[ 1  8 27 64]
+</code></pre><h4 id="三角函数-sin-cos-tan…"><a href="#三角函数-sin-cos-tan…" class="headerlink" title="三角函数(sin/cos/tan…)"></a>三角函数(sin/cos/tan…)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">np.sin(b)</div><div class="line">np.cos(b)</div><div class="line">np.tan(b)</div></pre></td></tr></table></figure>
 <h4 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">print(b)</div><div class="line">print(b&lt;3)</div></pre></td></tr></table></figure>
-<p>输出：<br><code>[1 2 3 4]
-[ True  True False False]</code><br>同理，也可以判断大于或等于</p>
+<p>输出：</p>
+<pre><code>[1 2 3 4]
+[ True  True False False]
+</code></pre><p>同理，也可以判断大于或等于</p>
 <h4 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h4><h5 id="sum"><a href="#sum" class="headerlink" title="sum"></a>sum</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">print(a)</div><div class="line">print(np.sum(a,axis=0))</div><div class="line">print(np.sum(a,axis=1))</div></pre></td></tr></table></figure>
-<p>输出：<br><code>[[10 20]
+<p>输出：</p>
+<pre><code>[[10 20]
  [30 40]]
 [40 60]
-[30 70]</code><br>axis = 0  对列求和<br>axis = 1  对行求和</p>
+[30 70]
+</code></pre><p>axis = 0  对列求和<br>axis = 1  对行求和</p>
 <h5 id="min-max"><a href="#min-max" class="headerlink" title="min/max"></a>min/max</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">print(a)</div><div class="line">print(&apos;min:&apos;, np.min(a))</div><div class="line">print(&apos;max:&apos;, np.max(a))</div></pre></td></tr></table></figure>
-<p>输出：<br><code>[[10 20]
+<p>输出：</p>
+<pre><code>[[10 20]
  [30 40]]
 min: 10
-max: 40</code><br>同样：max和min也可以设置axis参数，0和1分别返回该列的最大或最小值，该行的最大或最小值</p>
+max: 40
+</code></pre><p>同样：max和min也可以设置axis参数，0和1分别返回该列的最大或最小值，该行的最大或最小值</p>
 <h5 id="索引：argmin-a-axis-None-out-None-、argmax-a-axis-None-out-None"><a href="#索引：argmin-a-axis-None-out-None-、argmax-a-axis-None-out-None" class="headerlink" title="索引：argmin(a, axis=None, out=None)、argmax(a, axis=None, out=None)"></a>索引：argmin(a, axis=None, out=None)、argmax(a, axis=None, out=None)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">print(np.argmin(a))</div><div class="line">print(np.argmax(a))</div></pre></td></tr></table></figure>
-<p>argmin和argmax分别可以获取矩阵的最小和最大值索引<br>输出：<br><code>0
-3</code></p>
+<p>argmin和argmax分别可以获取矩阵的最小和最大值索引<br>输出：<br>    0<br>    3</p>
 <p>还可以通过下面两种方式指定坐标位置，进行索引查值，比如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">print(a[1][1])</div><div class="line">print(a[1,1])</div></pre></td></tr></table></figure>
-<p>输出：<br><code>40
-40</code></p>
-<p>获取第一行所有值：</p>
+<p>输出：</p>
+<pre><code>40
+40
+</code></pre><p>获取第一行所有值：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(a[0,:])</div></pre></td></tr></table></figure>
 <p>获取第二列所有值：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(a[:,1])</div></pre></td></tr></table></figure>
@@ -438,20 +454,15 @@ max: 40</code><br>同样：max和min也可以设置axis参数，0和1分别返�
 <h5 id="中位数：median-a-axis-None-out-None-overwrite-input-False-keepdims-False"><a href="#中位数：median-a-axis-None-out-None-overwrite-input-False-keepdims-False" class="headerlink" title="中位数：median(a, axis=None, out=None, overwrite_input=False, keepdims=False)"></a>中位数：median(a, axis=None, out=None, overwrite_input=False, keepdims=False)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(np.median(a))</div></pre></td></tr></table></figure>
 <p>输出：<br><code>25.0</code></p>
 <h5 id="累加值：cumsum-a-axis-None-dtype-None-out-None"><a href="#累加值：cumsum-a-axis-None-dtype-None-out-None" class="headerlink" title="累加值：cumsum(a, axis=None, dtype=None, out=None)"></a>累加值：cumsum(a, axis=None, dtype=None, out=None)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">A = np.arange(2,10).reshape(2,4)</div><div class="line">print(A)</div><div class="line">print(np.cumsum(A,axis=0))</div><div class="line">print(np.cumsum(A,axis=1))</div><div class="line">print(np.cumsum(A))</div></pre></td></tr></table></figure>
-<p>输出：<br><code>[[2 3 4 5]
- [6 7 8 9]]
-[[ 2  3  4  5]
- [ 8 10 12 14]]
-[[ 2  5  9 14]
- [ 6 13 21 30]]
-[ 2  5  9 14 20 27 35 44]</code></p>
+<p>输出：<br>    [[2 3 4 5]<br>     [6 7 8 9]]<br>    [[ 2  3  4  5]<br>     [ 8 10 12 14]]<br>    [[ 2  5  9 14]<br>     [ 6 13 21 30]]<br>[ 2  5  9 14 20 27 35 44]<br>`</p>
 <p>我们可以看到cumsum方法可以获得当前行、列、及整个矩阵的累加后的矩阵</p>
 <h5 id="排序-sort-a-axis-1-kind-’quicksort’-order-None"><a href="#排序-sort-a-axis-1-kind-’quicksort’-order-None" class="headerlink" title="排序:sort(a, axis=-1, kind=’quicksort’, order=None)"></a>排序:sort(a, axis=-1, kind=’quicksort’, order=None)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">B = np.random.randint(2,10,8).reshape(2,4)</div><div class="line">print(B)</div><div class="line">print(np.sort(B))</div></pre></td></tr></table></figure>
-<p>输出：<br><code>[[2 8 6 4]
+<p>输出：</p>
+<pre><code>[[2 8 6 4]
  [5 5 5 2]]
 [[2 4 6 8]
- [2 5 5 5]]</code></p>
-<h5 id="矩阵的转置（T-transpose-a-axes-None-）"><a href="#矩阵的转置（T-transpose-a-axes-None-）" class="headerlink" title="矩阵的转置（T/transpose(a, axes=None)）"></a>矩阵的转置（T/transpose(a, axes=None)）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">print(A)</div><div class="line">print(A.T)</div><div class="line">print(np.transpose(A))</div></pre></td></tr></table></figure>
+ [2 5 5 5]]
+</code></pre><h5 id="矩阵的转置（T-transpose-a-axes-None-）"><a href="#矩阵的转置（T-transpose-a-axes-None-）" class="headerlink" title="矩阵的转置（T/transpose(a, axes=None)）"></a>矩阵的转置（T/transpose(a, axes=None)）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">print(A)</div><div class="line">print(A.T)</div><div class="line">print(np.transpose(A))</div></pre></td></tr></table></figure>
 <p>输出：</p>
 <pre><code>[[2 3 4 5]
  [6 7 8 9]]
