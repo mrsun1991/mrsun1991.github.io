@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Layne&#39;s Blog">
 <meta property="og:description" content="NumPy是Python科学计算的基础包。它提供了多维数组对象、基于数组的各种派生对象（例如，masked Array, 矩阵）。除此之外，还提供了各种各样的加快数组操作的例程，包括数学基本计算、逻辑、图形操作、排序、选择、输入输出，离散傅立叶变换、基础线性代数、基础统计操作、随机仿真等等。本篇文章主要讲一些Numpy的基础用法。 1.属性首先创建一个numpy对象： 123456array =">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1fikeo8xarbj30ls0c90tn.jpg">
-<meta property="og:updated_time" content="2017-08-16T09:06:09.000Z">
+<meta property="og:updated_time" content="2017-08-16T09:08:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="新手学习Numpy">
 <meta name="twitter:description" content="NumPy是Python科学计算的基础包。它提供了多维数组对象、基于数组的各种派生对象（例如，masked Array, 矩阵）。除此之外，还提供了各种各样的加快数组操作的例程，包括数学基本计算、逻辑、图形操作、排序、选择、输入输出，离散傅立叶变换、基础线性代数、基础统计操作、随机仿真等等。本篇文章主要讲一些Numpy的基础用法。 1.属性首先创建一个numpy对象： 123456array =">
@@ -349,15 +349,23 @@
         <p>NumPy是Python科学计算的基础包。它提供了多维数组对象、基于数组的各种派生对象（例如，masked Array, 矩阵）。除此之外，还提供了各种各样的加快数组操作的例程，包括数学基本计算、逻辑、图形操作、排序、选择、输入输出，离散傅立叶变换、基础线性代数、基础统计操作、随机仿真等等。<br>本篇文章主要讲一些Numpy的基础用法。</p>
 <h2 id="1-属性"><a href="#1-属性" class="headerlink" title="1.属性"></a>1.属性</h2><p>首先创建一个numpy对象：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">array = np.array([</div><div class="line">[1,2,3],</div><div class="line">[2,3,4],</div><div class="line">[4,5,6]</div><div class="line">])</div><div class="line">print(array)</div></pre></td></tr></table></figure>
-<p>输出：<br><code>[[1 2 3]
+<p>输出：</p>
+<pre><code>[[1 2 3]
  [2 3 4]
- [4 5 6]]</code><br>这样我们就创建了一个二维的3*3矩阵</p>
+ [4 5 6]]
+</code></pre><p>这样我们就创建了一个二维的3*3矩阵</p>
 <h3 id="（1）NDim（维数）"><a href="#（1）NDim（维数）" class="headerlink" title="（1）NDim（维数）"></a>（1）NDim（维数）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(&quot;NDim:&quot;,array.ndim)</div></pre></td></tr></table></figure>
-<p>输出：<br><code>NDim: 2</code><br>我们可以看到NDim属性可以获取当前numpy对象的维数为二维</p>
+<p>输出：</p>
+<pre><code>NDim: 2
+</code></pre><p>我们可以看到NDim属性可以获取当前numpy对象的维数为二维</p>
 <h3 id="（2）shape（形状）"><a href="#（2）shape（形状）" class="headerlink" title="（2）shape（形状）"></a>（2）shape（形状）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(&quot;shape:&quot;,array.shape)</div></pre></td></tr></table></figure>
-<p>输出：<br><code>shape: (3, 3)</code><br>shape属性可以获得当前矩阵的形状为：3行3列</p>
+<p>输出：</p>
+<pre><code>shape: (3, 3)
+</code></pre><p>shape属性可以获得当前矩阵的形状为：3行3列</p>
 <h3 id="（3）size（大小）"><a href="#（3）size（大小）" class="headerlink" title="（3）size（大小）"></a>（3）size（大小）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(&quot;size:&quot;,array.size)</div></pre></td></tr></table></figure>
-<p>输出：<br><code>size: 9</code><br>size可以获取矩阵的大小，即 3*3 = 9</p>
+<p>输出：</p>
+<pre><code>size: 9
+</code></pre><p>size可以获取矩阵的大小，即 3*3 = 9</p>
 <h2 id="2-Numpy创建array"><a href="#2-Numpy创建array" class="headerlink" title="2.Numpy创建array"></a>2.Numpy创建array</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a = np.array([[2,23,4],[2,32,4]],dtype=np.int)</div><div class="line">print(a)</div></pre></td></tr></table></figure>
 <p>输出：<br><code>[[ 2 23  4]
  [ 2 32  4]]</code><br> 我们可以看到这样一个Numpy的array就创建完成了，从打印来看，这个array和Python的区别，它是没有逗号隔开。<br> 创建的时候我们可以通过使用dtype属性来设置它的数据类型.</p>
@@ -435,8 +443,10 @@ min: 10
 max: 40
 </code></pre><p>同样：max和min也可以设置axis参数，0和1分别返回该列的最大或最小值，该行的最大或最小值</p>
 <h5 id="索引：argmin-a-axis-None-out-None-、argmax-a-axis-None-out-None"><a href="#索引：argmin-a-axis-None-out-None-、argmax-a-axis-None-out-None" class="headerlink" title="索引：argmin(a, axis=None, out=None)、argmax(a, axis=None, out=None)"></a>索引：argmin(a, axis=None, out=None)、argmax(a, axis=None, out=None)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">print(np.argmin(a))</div><div class="line">print(np.argmax(a))</div></pre></td></tr></table></figure>
-<p>argmin和argmax分别可以获取矩阵的最小和最大值索引<br>输出：<br>    0<br>    3</p>
-<p>还可以通过下面两种方式指定坐标位置，进行索引查值，比如：</p>
+<p>argmin和argmax分别可以获取矩阵的最小和最大值索引<br>输出：</p>
+<pre><code>0
+3
+</code></pre><p>还可以通过下面两种方式指定坐标位置，进行索引查值，比如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">print(a[1][1])</div><div class="line">print(a[1,1])</div></pre></td></tr></table></figure>
 <p>输出：</p>
 <pre><code>40
@@ -447,15 +457,23 @@ max: 40
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(a[:,1])</div></pre></td></tr></table></figure>
 <p>获取第一行第一和第二列的值：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(a[0:2,1])</div></pre></td></tr></table></figure>
-<p>输出：<br><code>[20 40]</code></p>
-<h5 id="平均值：mean-self-axis-None-dtype-None-out-None-keepdims-False"><a href="#平均值：mean-self-axis-None-dtype-None-out-None-keepdims-False" class="headerlink" title="平均值：mean(self, axis=None, dtype=None, out=None, keepdims=False)"></a>平均值：mean(self, axis=None, dtype=None, out=None, keepdims=False)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">print(np.mean(a))</div><div class="line">print(a.mean())</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<pre><code>[20 40]
+</code></pre><h5 id="平均值：mean-self-axis-None-dtype-None-out-None-keepdims-False"><a href="#平均值：mean-self-axis-None-dtype-None-out-None-keepdims-False" class="headerlink" title="平均值：mean(self, axis=None, dtype=None, out=None, keepdims=False)"></a>平均值：mean(self, axis=None, dtype=None, out=None, keepdims=False)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">print(np.mean(a))</div><div class="line">print(a.mean())</div></pre></td></tr></table></figure>
 <p>输出：<br><code>25.0
 25.0</code><br>通过设置axis，还可以获取行或列的平均值</p>
 <h5 id="中位数：median-a-axis-None-out-None-overwrite-input-False-keepdims-False"><a href="#中位数：median-a-axis-None-out-None-overwrite-input-False-keepdims-False" class="headerlink" title="中位数：median(a, axis=None, out=None, overwrite_input=False, keepdims=False)"></a>中位数：median(a, axis=None, out=None, overwrite_input=False, keepdims=False)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(np.median(a))</div></pre></td></tr></table></figure>
 <p>输出：<br><code>25.0</code></p>
 <h5 id="累加值：cumsum-a-axis-None-dtype-None-out-None"><a href="#累加值：cumsum-a-axis-None-dtype-None-out-None" class="headerlink" title="累加值：cumsum(a, axis=None, dtype=None, out=None)"></a>累加值：cumsum(a, axis=None, dtype=None, out=None)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">A = np.arange(2,10).reshape(2,4)</div><div class="line">print(A)</div><div class="line">print(np.cumsum(A,axis=0))</div><div class="line">print(np.cumsum(A,axis=1))</div><div class="line">print(np.cumsum(A))</div></pre></td></tr></table></figure>
-<p>输出：<br>    [[2 3 4 5]<br>     [6 7 8 9]]<br>    [[ 2  3  4  5]<br>     [ 8 10 12 14]]<br>    [[ 2  5  9 14]<br>     [ 6 13 21 30]]<br>[ 2  5  9 14 20 27 35 44]<br>`</p>
-<p>我们可以看到cumsum方法可以获得当前行、列、及整个矩阵的累加后的矩阵</p>
+<p>输出：</p>
+<pre><code>[[2 3 4 5]
+ [6 7 8 9]]
+[[ 2  3  4  5]
+ [ 8 10 12 14]]
+[[ 2  5  9 14]
+ [ 6 13 21 30]]
+[ 2  5  9 14 20 27 35 44]
+</code></pre><p>我们可以看到cumsum方法可以获得当前行、列、及整个矩阵的累加后的矩阵</p>
 <h5 id="排序-sort-a-axis-1-kind-’quicksort’-order-None"><a href="#排序-sort-a-axis-1-kind-’quicksort’-order-None" class="headerlink" title="排序:sort(a, axis=-1, kind=’quicksort’, order=None)"></a>排序:sort(a, axis=-1, kind=’quicksort’, order=None)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">B = np.random.randint(2,10,8).reshape(2,4)</div><div class="line">print(B)</div><div class="line">print(np.sort(B))</div></pre></td></tr></table></figure>
 <p>输出：</p>
 <pre><code>[[2 8 6 4]
