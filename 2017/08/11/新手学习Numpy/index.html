@@ -1,0 +1,947 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="xwPvN9CvjP" />
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="xwPvN9CvjP" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="NumPy是Python科学计算的基础包。它提供了多维数组对象、基于数组的各种派生对象（例如，masked Array, 矩阵）。除此之外，还提供了各种各样的加快数组操作的例程，包括数学基本计算、逻辑、图形操作、排序、选择、输入输出，离散傅立叶变换、基础线性代数、基础统计操作、随机仿真等等。本篇文章主要讲一些Numpy的基础用法。 1.属性首先创建一个numpy对象： 123456array =">
+<meta property="og:type" content="article">
+<meta property="og:title" content="新手学习Numpy">
+<meta property="og:url" content="http://layne_sun.coding.me/2017/08/11/新手学习Numpy/index.html">
+<meta property="og:site_name" content="Layne&#39;s Blog">
+<meta property="og:description" content="NumPy是Python科学计算的基础包。它提供了多维数组对象、基于数组的各种派生对象（例如，masked Array, 矩阵）。除此之外，还提供了各种各样的加快数组操作的例程，包括数学基本计算、逻辑、图形操作、排序、选择、输入输出，离散傅立叶变换、基础线性代数、基础统计操作、随机仿真等等。本篇文章主要讲一些Numpy的基础用法。 1.属性首先创建一个numpy对象： 123456array =">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1fikeo8xarbj30ls0c90tn.jpg">
+<meta property="og:updated_time" content="2017-08-16T08:45:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="新手学习Numpy">
+<meta name="twitter:description" content="NumPy是Python科学计算的基础包。它提供了多维数组对象、基于数组的各种派生对象（例如，masked Array, 矩阵）。除此之外，还提供了各种各样的加快数组操作的例程，包括数学基本计算、逻辑、图形操作、排序、选择、输入输出，离散傅立叶变换、基础线性代数、基础统计操作、随机仿真等等。本篇文章主要讲一些Numpy的基础用法。 1.属性首先创建一个numpy对象： 123456array =">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1fikeo8xarbj30ls0c90tn.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://layne_sun.coding.me/2017/08/11/新手学习Numpy/"/>
+
+
+
+
+
+  <title>新手学习Numpy | Layne's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Layne's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://layne_sun.coding.me/2017/08/11/新手学习Numpy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="布莱恩没有布">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fgnhf039goj30tt0tyn6o.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Layne's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">新手学习Numpy</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-11T14:41:50+08:00">
+                2017-08-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/08/11/新手学习Numpy/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/08/11/新手学习Numpy/" class="leancloud_visitors" data-flag-title="新手学习Numpy">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>NumPy是Python科学计算的基础包。它提供了多维数组对象、基于数组的各种派生对象（例如，masked Array, 矩阵）。除此之外，还提供了各种各样的加快数组操作的例程，包括数学基本计算、逻辑、图形操作、排序、选择、输入输出，离散傅立叶变换、基础线性代数、基础统计操作、随机仿真等等。<br>本篇文章主要讲一些Numpy的基础用法。</p>
+<h2 id="1-属性"><a href="#1-属性" class="headerlink" title="1.属性"></a>1.属性</h2><p>首先创建一个numpy对象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">array = np.array([</div><div class="line">[1,2,3],</div><div class="line">[2,3,4],</div><div class="line">[4,5,6]</div><div class="line">])</div><div class="line">print(array)</div></pre></td></tr></table></figure>
+<p>输出：<br><code>[[1 2 3]
+ [2 3 4]
+ [4 5 6]]</code><br>这样我们就创建了一个二维的3*3矩阵</p>
+<h3 id="（1）NDim（维数）"><a href="#（1）NDim（维数）" class="headerlink" title="（1）NDim（维数）"></a>（1）NDim（维数）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(&quot;NDim:&quot;,array.ndim)</div></pre></td></tr></table></figure>
+<p>输出：<br><code>NDim: 2</code><br>我们可以看到NDim属性可以获取当前numpy对象的维数为二维</p>
+<h3 id="（2）shape（形状）"><a href="#（2）shape（形状）" class="headerlink" title="（2）shape（形状）"></a>（2）shape（形状）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(&quot;shape:&quot;,array.shape)</div></pre></td></tr></table></figure>
+<p>输出：<br><code>shape: (3, 3)</code><br>shape属性可以获得当前矩阵的形状为：3行3列</p>
+<h3 id="（3）size（大小）"><a href="#（3）size（大小）" class="headerlink" title="（3）size（大小）"></a>（3）size（大小）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(&quot;size:&quot;,array.size)</div></pre></td></tr></table></figure>
+<p>输出：<br><code>size: 9</code><br>size可以获取矩阵的大小，即 3*3 = 9</p>
+<h2 id="2-Numpy创建array"><a href="#2-Numpy创建array" class="headerlink" title="2.Numpy创建array"></a>2.Numpy创建array</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a = np.array([[2,23,4],[2,32,4]],dtype=np.int)</div><div class="line">print(a)</div></pre></td></tr></table></figure>
+<p>输出：<br><code>[[ 2 23  4]
+ [ 2 32  4]]</code><br> 我们可以看到这样一个Numpy的array就创建完成了，从打印来看，这个array和Python的区别，它是没有逗号隔开。<br> 创建的时候我们可以通过使用dtype属性来设置它的数据类型.</p>
+<p> Numpy数据类型：<br><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fikeo8xarbj30ls0c90tn.jpg" alt=""></p>
+<p>说道数据类型的，我们来看下它的类型转换（astype）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">print(a.dtype)</div><div class="line">a = a.astype(np.float32)</div><div class="line">print(a.dtype)</div><div class="line">print(a)</div></pre></td></tr></table></figure>
+<p>输出：<br><code>int64
+float32
+[[  2.  23.   4.]
+ [  2.  32.   4.]]</code><br>可以看到，通过astype()函数，就把a的数据类型由int转换为了float32</p>
+<h4 id="定义全部为0的矩阵："><a href="#定义全部为0的矩阵：" class="headerlink" title="定义全部为0的矩阵："></a>定义全部为0的矩阵：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">zero = np.zeros((3,4))</div><div class="line">print(zero)</div></pre></td></tr></table></figure>
+<p>输出（3x4）：<br><code>[[ 0.  0.  0.  0.]
+ [ 0.  0.  0.  0.]
+ [ 0.  0.  0.  0.]]</code></p>
+<h4 id="定义全部为1的矩阵："><a href="#定义全部为1的矩阵：" class="headerlink" title="定义全部为1的矩阵："></a>定义全部为1的矩阵：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">one = np.ones((5,6),int)</div><div class="line">print(one)</div></pre></td></tr></table></figure>
+<p>输出（2x3）：<br><code>[[1 1 1]
+ [1 1 1]]</code></p>
+<h4 id="定义有序矩阵"><a href="#定义有序矩阵" class="headerlink" title="定义有序矩阵"></a>定义有序矩阵</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">arange = np.arange(10,20,3)</div><div class="line">print(arange)</div></pre></td></tr></table></figure>
+<p>输出（从10到20，步进为3的矩阵）：<br><code>[10 13 16 19]</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">aran = np.arange(0,12).reshape((3,4))</div><div class="line">print(aran)</div></pre></td></tr></table></figure>
+<p>输出（0~11的3x4阶矩阵）：<br><code>[[ 0  1  2  3]
+ [ 4  5  6  7]
+ [ 8  9 10 11]]</code></p>
+<h6 id="注意：这里的arange（）中参数为前闭后开区间，即包含起始值，不包含结尾值；并且这个区间的定义一定要完全等于你定义的矩阵所需要的值"><a href="#注意：这里的arange（）中参数为前闭后开区间，即包含起始值，不包含结尾值；并且这个区间的定义一定要完全等于你定义的矩阵所需要的值" class="headerlink" title="注意：这里的arange（）中参数为前闭后开区间，即包含起始值，不包含结尾值；并且这个区间的定义一定要完全等于你定义的矩阵所需要的值"></a>注意：这里的arange（）中参数为前闭后开区间，即包含起始值，不包含结尾值；并且这个区间的定义一定要完全等于你定义的矩阵所需要的值</h6><h4 id="等差矩阵"><a href="#等差矩阵" class="headerlink" title="等差矩阵"></a>等差矩阵</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">line= line= np.linspace(1,10,4,dtype=int).reshape(2,2)</div><div class="line">print(line)</div></pre></td></tr></table></figure>
+<p>输出（1~10分为4段的2x2矩阵，注意如果不定义几段的话，会默认分成50段）：<br><code>[[ 1  4]
+ [ 7 10]]</code></p>
+<h2 id="3-Numpy的基本运算"><a href="#3-Numpy的基本运算" class="headerlink" title="3.Numpy的基本运算"></a>3.Numpy的基本运算</h2><h4 id="加减乘除"><a href="#加减乘除" class="headerlink" title="加减乘除"></a>加减乘除</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">a = np.array([[10,20],</div><div class="line">              [30,40]])</div><div class="line">b = np.arange(1,5).reshape(2,2)</div><div class="line">print(a)</div><div class="line">print(b)</div><div class="line">c = a + b</div><div class="line">d = a - b</div><div class="line">e = a * b</div><div class="line">f = a / b</div><div class="line"></div><div class="line">print(c)</div><div class="line">print(d)</div><div class="line">print(e)</div><div class="line">print(f)</div></pre></td></tr></table></figure>
+<p>输出：<br><code>[[10 20]
+ [30 40]]
+[[1 2]
+ [3 4]]
+[[11 22]
+ [33 44]]
+[[ 9 18]
+ [27 36]]
+[[ 10  40]
+ [ 90 160]]
+[[ 10.  10.]
+ [ 10.  10.]]</code></p>
+<h5 id="矩阵乘法（矩阵乘法）"><a href="#矩阵乘法（矩阵乘法）" class="headerlink" title="矩阵乘法（矩阵乘法）"></a>矩阵乘法（矩阵乘法）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">c_dot = np.dot(a,b)</div><div class="line">print(c_dot)</div></pre></td></tr></table></figure>
+<p>上面的矩阵乘法也可以这样写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">a.dot(b)</div></pre></td></tr></table></figure>
+<p>输出：<br><code>[[ 70 100]
+ [150 220]]</code></p>
+<h4 id="乘方"><a href="#乘方" class="headerlink" title="乘方(**)"></a>乘方(**)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(b**3)</div></pre></td></tr></table></figure>
+<p>输出（b矩阵的3次方）：<br><code>[ 1  8 27 64]</code></p>
+<h4 id="三角函数-sin-cos-tan…"><a href="#三角函数-sin-cos-tan…" class="headerlink" title="三角函数(sin/cos/tan…)"></a>三角函数(sin/cos/tan…)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">np.sin(b)</div><div class="line">np.cos(b)</div><div class="line">np.tan(b)</div></pre></td></tr></table></figure>
+<h4 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">print(b)</div><div class="line">print(b&lt;3)</div></pre></td></tr></table></figure>
+<p>输出：<br><code>[1 2 3 4]
+[ True  True False False]</code><br>同理，也可以判断大于或等于</p>
+<h4 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h4><h5 id="sum"><a href="#sum" class="headerlink" title="sum"></a>sum</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">print(a)</div><div class="line">print(np.sum(a,axis=0))</div><div class="line">print(np.sum(a,axis=1))</div></pre></td></tr></table></figure>
+<p>输出：<br><code>[[10 20]
+ [30 40]]
+[40 60]
+[30 70]</code><br>axis = 0  对列求和<br>axis = 1  对行求和</p>
+<h5 id="min-max"><a href="#min-max" class="headerlink" title="min/max"></a>min/max</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">print(a)</div><div class="line">print(&apos;min:&apos;, np.min(a))</div><div class="line">print(&apos;max:&apos;, np.max(a))</div></pre></td></tr></table></figure>
+<p>输出：<br><code>[[10 20]
+ [30 40]]
+min: 10
+max: 40</code><br>同样：max和min也可以设置axis参数，0和1分别返回该列的最大或最小值，该行的最大或最小值</p>
+<h5 id="索引：argmin-a-axis-None-out-None-、argmax-a-axis-None-out-None"><a href="#索引：argmin-a-axis-None-out-None-、argmax-a-axis-None-out-None" class="headerlink" title="索引：argmin(a, axis=None, out=None)、argmax(a, axis=None, out=None)"></a>索引：argmin(a, axis=None, out=None)、argmax(a, axis=None, out=None)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">print(np.argmin(a))</div><div class="line">print(np.argmax(a))</div></pre></td></tr></table></figure>
+<p>argmin和argmax分别可以获取矩阵的最小和最大值索引<br>输出：<br><code>0
+3</code></p>
+<p>还可以通过下面两种方式指定坐标位置，进行索引查值，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">print(a[1][1])</div><div class="line">print(a[1,1])</div></pre></td></tr></table></figure>
+<p>输出：<br><code>40
+40</code></p>
+<p>获取第一行所有值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(a[0,:])</div></pre></td></tr></table></figure>
+<p>获取第二列所有值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(a[:,1])</div></pre></td></tr></table></figure>
+<p>获取第一行第一和第二列的值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(a[0:2,1])</div></pre></td></tr></table></figure>
+<p>输出：<br><code>[20 40]</code></p>
+<h5 id="平均值：mean-self-axis-None-dtype-None-out-None-keepdims-False"><a href="#平均值：mean-self-axis-None-dtype-None-out-None-keepdims-False" class="headerlink" title="平均值：mean(self, axis=None, dtype=None, out=None, keepdims=False)"></a>平均值：mean(self, axis=None, dtype=None, out=None, keepdims=False)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">print(np.mean(a))</div><div class="line">print(a.mean())</div></pre></td></tr></table></figure>
+<p>输出：<br><code>25.0
+25.0</code><br>通过设置axis，还可以获取行或列的平均值</p>
+<h5 id="中位数：median-a-axis-None-out-None-overwrite-input-False-keepdims-False"><a href="#中位数：median-a-axis-None-out-None-overwrite-input-False-keepdims-False" class="headerlink" title="中位数：median(a, axis=None, out=None, overwrite_input=False, keepdims=False)"></a>中位数：median(a, axis=None, out=None, overwrite_input=False, keepdims=False)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(np.median(a))</div></pre></td></tr></table></figure>
+<p>输出：<br><code>25.0</code></p>
+<h5 id="累加值：cumsum-a-axis-None-dtype-None-out-None"><a href="#累加值：cumsum-a-axis-None-dtype-None-out-None" class="headerlink" title="累加值：cumsum(a, axis=None, dtype=None, out=None)"></a>累加值：cumsum(a, axis=None, dtype=None, out=None)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">A = np.arange(2,10).reshape(2,4)</div><div class="line">print(A)</div><div class="line">print(np.cumsum(A,axis=0))</div><div class="line">print(np.cumsum(A,axis=1))</div><div class="line">print(np.cumsum(A))</div></pre></td></tr></table></figure>
+<p>输出：<br><code>[[2 3 4 5]
+ [6 7 8 9]]
+[[ 2  3  4  5]
+ [ 8 10 12 14]]
+[[ 2  5  9 14]
+ [ 6 13 21 30]]
+[ 2  5  9 14 20 27 35 44]</code></p>
+<p>我们可以看到cumsum方法可以获得当前行、列、及整个矩阵的累加后的矩阵</p>
+<h5 id="排序-sort-a-axis-1-kind-’quicksort’-order-None"><a href="#排序-sort-a-axis-1-kind-’quicksort’-order-None" class="headerlink" title="排序:sort(a, axis=-1, kind=’quicksort’, order=None)"></a>排序:sort(a, axis=-1, kind=’quicksort’, order=None)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">B = np.random.randint(2,10,8).reshape(2,4)</div><div class="line">print(B)</div><div class="line">print(np.sort(B))</div></pre></td></tr></table></figure>
+<p>输出：<br><code>[[2 8 6 4]
+ [5 5 5 2]]
+[[2 4 6 8]
+ [2 5 5 5]]</code></p>
+<h5 id="矩阵的转置（T-transpose-a-axes-None-）"><a href="#矩阵的转置（T-transpose-a-axes-None-）" class="headerlink" title="矩阵的转置（T/transpose(a, axes=None)）"></a>矩阵的转置（T/transpose(a, axes=None)）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">print(A)</div><div class="line">print(A.T)</div><div class="line">print(np.transpose(A))</div></pre></td></tr></table></figure>
+<p>输出：<br><code>[[2 3 4 5]
+ [6 7 8 9]]
+[[2 6]
+ [3 7]
+ [4 8]
+ [5 9]]
+[[2 6]
+ [3 7]
+ [4 8]
+ [5 9]]</code></p>
+<h5 id="矩阵的截取：clip-a-a-min-a-max-out-None"><a href="#矩阵的截取：clip-a-a-min-a-max-out-None" class="headerlink" title="矩阵的截取：clip(a, a_min, a_max, out=None)"></a>矩阵的截取：clip(a, a_min, a_max, out=None)</h5><p>小于a_min的值全部置为a_min,大于a_max的值全部置为a_max，其他值不变</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">print(A)</div><div class="line">print(np.clip(A,4,8))</div></pre></td></tr></table></figure>
+<p>输出：<br><code>[[2 3 4 5]
+ [6 7 8 9]]
+[[4 4 4 5]
+ [6 7 8 8]]</code></p>
+<h5 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h5><p>比如：for循环迭代所有的行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">for row in A:</div><div class="line">    print(row)</div></pre></td></tr></table></figure>
+<p>输出：<br><code>[2 3 4 5]
+[6 7 8 9]</code></p>
+<p>行可以直接迭代出结果，但是列，Numpy并没有提供方法，不过我们刚刚学了转置的方法，想迭代列，只需要先对其转置，再迭代行即可。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">for column in A.T:</div><div class="line">    print(column)</div></pre></td></tr></table></figure>
+<p>输出：<br><code>[2 6]
+[3 7]
+[4 8]
+[5 9]</code></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/07/Python爬虫之BeautifulSoup-二/" rel="next" title="Python爬虫之BeautifulSoup(二)">
+                <i class="fa fa-chevron-left"></i> Python爬虫之BeautifulSoup(二)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://ws4.sinaimg.cn/large/006tNbRwly1fgnhf039goj30tt0tyn6o.jpg"
+               alt="布莱恩没有布" />
+          <p class="site-author-name" itemprop="name">布莱恩没有布</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-属性"><span class="nav-number">1.</span> <span class="nav-text">1.属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#（1）NDim（维数）"><span class="nav-number">1.1.</span> <span class="nav-text">（1）NDim（维数）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（2）shape（形状）"><span class="nav-number">1.2.</span> <span class="nav-text">（2）shape（形状）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（3）size（大小）"><span class="nav-number">1.3.</span> <span class="nav-text">（3）size（大小）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Numpy创建array"><span class="nav-number">2.</span> <span class="nav-text">2.Numpy创建array</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义全部为0的矩阵："><span class="nav-number">2.0.1.</span> <span class="nav-text">定义全部为0的矩阵：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义全部为1的矩阵："><span class="nav-number">2.0.2.</span> <span class="nav-text">定义全部为1的矩阵：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义有序矩阵"><span class="nav-number">2.0.3.</span> <span class="nav-text">定义有序矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#注意：这里的arange（）中参数为前闭后开区间，即包含起始值，不包含结尾值；并且这个区间的定义一定要完全等于你定义的矩阵所需要的值"><span class="nav-number">2.0.3.0.1.</span> <span class="nav-text">注意：这里的arange（）中参数为前闭后开区间，即包含起始值，不包含结尾值；并且这个区间的定义一定要完全等于你定义的矩阵所需要的值</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#等差矩阵"><span class="nav-number">2.0.4.</span> <span class="nav-text">等差矩阵</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Numpy的基本运算"><span class="nav-number">3.</span> <span class="nav-text">3.Numpy的基本运算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#加减乘除"><span class="nav-number">3.0.1.</span> <span class="nav-text">加减乘除</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#矩阵乘法（矩阵乘法）"><span class="nav-number">3.0.1.1.</span> <span class="nav-text">矩阵乘法（矩阵乘法）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#乘方"><span class="nav-number">3.0.2.</span> <span class="nav-text">乘方(**)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三角函数-sin-cos-tan…"><span class="nav-number">3.0.3.</span> <span class="nav-text">三角函数(sin/cos/tan…)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#比较"><span class="nav-number">3.0.4.</span> <span class="nav-text">比较</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他方法"><span class="nav-number">3.0.5.</span> <span class="nav-text">其他方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#sum"><span class="nav-number">3.0.5.1.</span> <span class="nav-text">sum</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#min-max"><span class="nav-number">3.0.5.2.</span> <span class="nav-text">min/max</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#索引：argmin-a-axis-None-out-None-、argmax-a-axis-None-out-None"><span class="nav-number">3.0.5.3.</span> <span class="nav-text">索引：argmin(a, axis=None, out=None)、argmax(a, axis=None, out=None)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#平均值：mean-self-axis-None-dtype-None-out-None-keepdims-False"><span class="nav-number">3.0.5.4.</span> <span class="nav-text">平均值：mean(self, axis=None, dtype=None, out=None, keepdims=False)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#中位数：median-a-axis-None-out-None-overwrite-input-False-keepdims-False"><span class="nav-number">3.0.5.5.</span> <span class="nav-text">中位数：median(a, axis=None, out=None, overwrite_input=False, keepdims=False)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#累加值：cumsum-a-axis-None-dtype-None-out-None"><span class="nav-number">3.0.5.6.</span> <span class="nav-text">累加值：cumsum(a, axis=None, dtype=None, out=None)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#排序-sort-a-axis-1-kind-’quicksort’-order-None"><span class="nav-number">3.0.5.7.</span> <span class="nav-text">排序:sort(a, axis=-1, kind=’quicksort’, order=None)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#矩阵的转置（T-transpose-a-axes-None-）"><span class="nav-number">3.0.5.8.</span> <span class="nav-text">矩阵的转置（T/transpose(a, axes=None)）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#矩阵的截取：clip-a-a-min-a-max-out-None"><span class="nav-number">3.0.5.9.</span> <span class="nav-text">矩阵的截取：clip(a, a_min, a_max, out=None)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#迭代"><span class="nav-number">3.0.5.10.</span> <span class="nav-text">迭代</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">布莱恩没有布</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "ac8807c99a7e48a1a551bdccbb46edc0",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("jMVQrETP1B0CN6xLQed92MgU-gzGzoHsz", "smqMp8b8Q3v0YeWFeouV8eH9");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
