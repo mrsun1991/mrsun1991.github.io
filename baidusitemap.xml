@@ -4,6 +4,42 @@
 
     
   <url>
+    <loc>http://layne_sun.coding.me/2017/08/19/Matplotilb%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/</loc>
+    <lastmod>2017-08-21T02:46:25.000Z</lastmod>
+    <data>
+        <display>
+        <title>Matplotilb数据可视化</title>
+        <pubTime>2017-08-19T14:15:37.000Z</pubTime>
+        
+        <tag>Matplotilb</tag>
+         
+        <tag>数据可视化</tag>
+         
+        <tag>Python</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://layne_sun.coding.me/2017/08/16/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B9%8BPandas/</loc>
+    <lastmod>2017-08-16T13:53:36.000Z</lastmod>
+    <data>
+        <display>
+        <title>数据分析之Pandas</title>
+        <pubTime>2017-08-16T13:53:36.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://layne_sun.coding.me/2017/08/11/%E6%96%B0%E6%89%8B%E5%AD%A6%E4%B9%A0Numpy/</loc>
     <lastmod>2017-08-16T11:26:13.000Z</lastmod>
     <data>
@@ -11,9 +47,9 @@
         <title>新手学习Numpy</title>
         <pubTime>2017-08-11T06:41:50.000Z</pubTime>
         
-        <tag>Numpy</tag>
-         
         <tag>Python</tag>
+         
+        <tag>Numpy</tag>
          
         <tag>数据分析</tag>
          
