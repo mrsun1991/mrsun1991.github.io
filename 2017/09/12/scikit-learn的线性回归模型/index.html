@@ -1,0 +1,905 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="xwPvN9CvjP" />
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="xwPvN9CvjP" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="主要使用技术：  pandas读取数据 数据分析通常大家都会建议先学习Numpy（一个支持多维数组的Python库），可能之前的确是这样的，但是现在几乎很少用到Numpy了，一些新的类库基于Numpy进行了封装和扩展，这些库比Numpy更加易用和强大，比如Pandas。Pandas已经成为了处理数据主要使用的类库。 Seaborn可视化数据 Matplotlib是Python主要的绘图库。但是如果">
+<meta property="og:type" content="article">
+<meta property="og:title" content="scikit-learn的线性回归模型">
+<meta property="og:url" content="http://layne_sun.coding.me/2017/09/12/scikit-learn的线性回归模型/index.html">
+<meta property="og:site_name" content="Layne&#39;s Blog">
+<meta property="og:description" content="主要使用技术：  pandas读取数据 数据分析通常大家都会建议先学习Numpy（一个支持多维数组的Python库），可能之前的确是这样的，但是现在几乎很少用到Numpy了，一些新的类库基于Numpy进行了封装和扩展，这些库比Numpy更加易用和强大，比如Pandas。Pandas已经成为了处理数据主要使用的类库。 Seaborn可视化数据 Matplotlib是Python主要的绘图库。但是如果">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcly1fjhrjcxwc7j31kw0v4tf2.jpg">
+<meta property="og:updated_time" content="2017-09-13T09:04:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="scikit-learn的线性回归模型">
+<meta name="twitter:description" content="主要使用技术：  pandas读取数据 数据分析通常大家都会建议先学习Numpy（一个支持多维数组的Python库），可能之前的确是这样的，但是现在几乎很少用到Numpy了，一些新的类库基于Numpy进行了封装和扩展，这些库比Numpy更加易用和强大，比如Pandas。Pandas已经成为了处理数据主要使用的类库。 Seaborn可视化数据 Matplotlib是Python主要的绘图库。但是如果">
+<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/006tKfTcly1fjhrjcxwc7j31kw0v4tf2.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://layne_sun.coding.me/2017/09/12/scikit-learn的线性回归模型/"/>
+
+
+
+
+
+  <title>scikit-learn的线性回归模型 | Layne's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Layne's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://layne_sun.coding.me/2017/09/12/scikit-learn的线性回归模型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="布莱恩没有布">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fgnhf039goj30tt0tyn6o.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Layne's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">scikit-learn的线性回归模型</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-12T22:44:01+08:00">
+                2017-09-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/09/12/scikit-learn的线性回归模型/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/09/12/scikit-learn的线性回归模型/" class="leancloud_visitors" data-flag-title="scikit-learn的线性回归模型">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>主要使用技术：</p>
+<ul>
+<li><p>pandas读取数据</p>
+<h5 id="数据分析通常大家都会建议先学习Numpy（一个支持多维数组的Python库），可能之前的确是这样的，但是现在几乎很少用到Numpy了，一些新的类库基于Numpy进行了封装和扩展，这些库比Numpy更加易用和强大，比如Pandas。Pandas已经成为了处理数据主要使用的类库。"><a href="#数据分析通常大家都会建议先学习Numpy（一个支持多维数组的Python库），可能之前的确是这样的，但是现在几乎很少用到Numpy了，一些新的类库基于Numpy进行了封装和扩展，这些库比Numpy更加易用和强大，比如Pandas。Pandas已经成为了处理数据主要使用的类库。" class="headerlink" title="数据分析通常大家都会建议先学习Numpy（一个支持多维数组的Python库），可能之前的确是这样的，但是现在几乎很少用到Numpy了，一些新的类库基于Numpy进行了封装和扩展，这些库比Numpy更加易用和强大，比如Pandas。Pandas已经成为了处理数据主要使用的类库。"></a>数据分析通常大家都会建议先学习Numpy（一个支持多维数组的Python库），可能之前的确是这样的，但是现在几乎很少用到Numpy了，一些新的类库基于Numpy进行了封装和扩展，这些库比Numpy更加易用和强大，比如Pandas。Pandas已经成为了处理数据主要使用的类库。</h5></li>
+<li><p>Seaborn可视化数据</p>
+<h5 id="Matplotlib是Python主要的绘图库。但是如果初学的话，可以从Seaborn开始入手，Matplotlib虽然功能强大，但是很复杂，绘制的图形如果想要达到预期的效果，往往需要经过大量的调整。Seaborn本质上使用Matplotlib作为核心库（就像上面Pandas与Numpy的关系一样）"><a href="#Matplotlib是Python主要的绘图库。但是如果初学的话，可以从Seaborn开始入手，Matplotlib虽然功能强大，但是很复杂，绘制的图形如果想要达到预期的效果，往往需要经过大量的调整。Seaborn本质上使用Matplotlib作为核心库（就像上面Pandas与Numpy的关系一样）" class="headerlink" title="Matplotlib是Python主要的绘图库。但是如果初学的话，可以从Seaborn开始入手，Matplotlib虽然功能强大，但是很复杂，绘制的图形如果想要达到预期的效果，往往需要经过大量的调整。Seaborn本质上使用Matplotlib作为核心库（就像上面Pandas与Numpy的关系一样）"></a>Matplotlib是Python主要的绘图库。但是如果初学的话，可以从Seaborn开始入手，Matplotlib虽然功能强大，但是很复杂，绘制的图形如果想要达到预期的效果，往往需要经过大量的调整。Seaborn本质上使用Matplotlib作为核心库（就像上面Pandas与Numpy的关系一样）</h5></li>
+<li><p>scikit-learn的线性回归模型及使用</p>
+</li>
+<li>线性回归模型误差评估</li>
+<li>特征选择方法</li>
+</ul>
+<h2 id="1-使用pandas来读取数据"><a href="#1-使用pandas来读取数据" class="headerlink" title="1. 使用pandas来读取数据"></a>1. 使用pandas来读取数据</h2><p>首先导入Pandas库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import pandas as pd</div></pre></td></tr></table></figure>
+<p>导入数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">data = pd.read_csv(&apos;http://www-bcf.usc.edu/~gareth/ISL/Advertising.csv&apos;, index_col=0)</div></pre></td></tr></table></figure>
+<p>打印数据的前五行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">printf(data.head())</div></pre></td></tr></table></figure>
+<p>输出内容如下所示：</p>
+<pre><code>      TV  radio  newspaper  sales
+1  230.1   37.8       69.2   22.1
+2   44.5   39.3       45.1   10.4
+3   17.2   45.9       69.3    9.3
+4  151.5   41.3       58.5   18.5
+5  180.8   10.8       58.4   12.9
+</code></pre><p>上面结果中的这个类似表格的结构成为Pandas的数据帧（DataFrame）</p>
+<p>Pandas有两个主要的数据结构：Series和DataFrame：</p>
+<ul>
+<li>Series类似于一维数组，它有一组数据以及一组与之相关的数据标签(即索引)组成。</li>
+<li>DataFrame是一个表格型的数据结构，它含有一组有序的列，每列可以是不同的值类型。DataFrame既有行索引也有列索引，它可以被看做由Series组成的字典。</li>
+</ul>
+<p>线性回归主要找的就是特征和响应之间的线性关系，我们先从上表中分别找出特征项和响应项。</p>
+<p><strong>特征：</strong></p>
+<ul>
+<li>TV：对于一个给定市场中单一产品，用于电视上的广告费用（以千为单位）</li>
+<li>Radio：在广播媒体上投资的广告费用</li>
+<li>Newspaper：用于报纸媒体的广告费用</li>
+</ul>
+<p><strong>响应：</strong></p>
+<ul>
+<li>Sales：对应产品的销量</li>
+</ul>
+<p>在这个案例中，通过不同渠道的广告投入（电视，广播，报纸），预测产品销量。因为响应变量是一个连续的值，所以该问题是一个回归问题。</p>
+<p>导入可视化绘制库：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import seaborn as sns</div><div class="line">import matplotlib.pyplot as plt</div></pre></td></tr></table></figure>
+<p>分别绘制出三个特征值和销量之间的关系图：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">plt.show(sns.pairplot(data, x_vars=[&apos;TV&apos;,&apos;Radio&apos;,&apos;Newspaper&apos;], y_vars=&apos;Sales&apos;, size=7, aspect=0.8,kind=&apos;reg&apos;))</div></pre></td></tr></table></figure>
+<p>图形如下（其中 kind=’reg’，  seaborn可以添加一条最佳拟合直线和95%的置信带）：<br><img src="https://ws2.sinaimg.cn/large/006tKfTcly1fjhrjcxwc7j31kw0v4tf2.jpg" alt=""></p>
+<p>其中：seaborn的pairplot函数绘制X的每一维度和对应Y的散点图。通过设置size和aspect参数来调节显示的大小和比例。可以从图中看出，TV特征和销量是有比较强的线性关系的，而Radio和Sales线性关系弱一些，Newspaper和Sales线性关系更弱。通过加入一个参数kind=’reg’，seaborn可以添加一条最佳拟合直线和95%的置信带。</p>
+<h2 id="2-线性回归模型"><a href="#2-线性回归模型" class="headerlink" title="2. 线性回归模型"></a>2. 线性回归模型</h2><p>优点：快速；没有调节参数；可轻易解释；可理解</p>
+<p>缺点：相比其他复杂一些的模型，其预测准确率不是太高，因为它假设特征和响应之间存在确定的线性关系，这种假设对于非线性的关系，线性回归模型显然不能很好的对这种数据建模。</p>
+<p>线性模型表达式： y=β0+β1x1+β2x2+…+βnxn 其中</p>
+<p>y是响应<br>β0是截距<br>β1是x1的系数，以此类推<br>在这个案例中： y=β0+β1∗TV+β2∗Radio+…+βn∗Newspaper</p>
+<h3 id="（1）使用Pandas构建x和y"><a href="#（1）使用Pandas构建x和y" class="headerlink" title="（1）使用Pandas构建x和y"></a><strong>（1）使用Pandas构建x和y</strong></h3><ul>
+<li>scikit-learn要求X是一个特征矩阵，y是一个NumPy向量</li>
+<li>pandas构建在NumPy之上，因此，X可以是pandas的DataFrame，y可以是pandas的Series，scikit-learn可以理解这种结构</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#Python表格列名</div><div class="line">feature_cols = [&apos;TV&apos;, &apos;Radio&apos;, &apos;Newspaper&apos;]</div><div class="line"></div><div class="line">#创建特征矩阵</div><div class="line">X = data[feature_cols] </div><div class="line"></div><div class="line">#创建响应的Numpy相量</div><div class="line">y = data[&apos;Sales&apos;]</div></pre></td></tr></table></figure>
+<h3 id="2-构造训练集和测试集"><a href="#2-构造训练集和测试集" class="headerlink" title="(2)构造训练集和测试集"></a>(2)构造训练集和测试集</h3><p>导入类库：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">from sklearn.cross_validation import train_test_split</div></pre></td></tr></table></figure>
+<p>构建训练集：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"># # train_test_split(train_data,train_target,test_size=0.4, random_state=0)</div><div class="line"># train_data：所要划分的样本特征集</div><div class="line"># train_target：所要划分的样本结果</div><div class="line"># test_size：样本占比，如果是整数的话就是样本的数量（缺省默认0.25）</div><div class="line"># random_state：随机数的种子。</div><div class="line"># 随机数种子：其实就是该组随机数的编号，在需要重复试验的时候，保证得到一组一样的随机数。比如你每次都填1，其他参数一样的情况下你得到的随机数组是一样的。但填0或不填，每次都会不一样。</div><div class="line"># 随机数的产生取决于种子，随机数和种子之间的关系遵从以下两个规则：</div><div class="line"># 种子不同，产生不同的随机数；种子相同，即使实例不同也产生相同的随机数。</div><div class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=1)</div></pre></td></tr></table></figure>
+<h3 id="3-Scikit-learn的线性回归"><a href="#3-Scikit-learn的线性回归" class="headerlink" title="(3)Scikit-learn的线性回归"></a>(3)Scikit-learn的线性回归</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">from sklearn.linear_model import LinearRegression</div><div class="line"></div><div class="line">linreg = LinearRegression()</div><div class="line"></div><div class="line">linreg.fit(X_train, y_train)</div></pre></td></tr></table></figure>
+<p>输出训练结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 截距</div><div class="line">print (linreg.intercept_)</div><div class="line"></div><div class="line"># 系数</div><div class="line">print (linreg.coef_)</div></pre></td></tr></table></figure>
+<p>输出结果如下：</p>
+<p><code>截距： 2.87696662232
+系数： [ 0.04656457  0.17915812  0.00345046]</code><br> 这样我们就可以得出销售额和各个渠道广告投放的关系了：<br>y=2.88+0.0466∗TV+0.179∗radio+0.00345∗newspaper</p>
+<h3 id="4-预测"><a href="#4-预测" class="headerlink" title="(4)预测"></a>(4)预测</h3><p>生成预测结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">y_pred = linreg.predict(X_test)</div></pre></td></tr></table></figure>
+<p>##3.线性回归模型误差评估<br>这里插入几个误差的概念：</p>
+<h5 id="平均绝对误差-MAE"><a href="#平均绝对误差-MAE" class="headerlink" title="平均绝对误差 MAE"></a><1>平均绝对误差 MAE</1></h5><p>是所有单个观测值与算术平均值的偏差的绝对值的平均。与平均误差相比，平均绝对误差由于离差被绝对值化，不会出现正负相抵消的情况，因而，平均绝对误差能更好地反映预测值误差的实际情况。</p>
+<h5 id="均方误差-MSE"><a href="#均方误差-MSE" class="headerlink" title="均方误差 MSE"></a><2>均方误差 MSE</2></h5><p>随机变量x的所有可能取值x1，x2，…，xn与其平均值x之差的平方和的平均值叫方差，记为D(x)，方差的正平方根叫均方差，RMSE=√D(x)，它可作为衡量测量精度的一种数值指标。</p>
+<h5 id="均方根误差-RMSE"><a href="#均方根误差-RMSE" class="headerlink" title="均方根误差 RMSE"></a><3>均方根误差 RMSE</3></h5><p>它是观测值与真值偏差的平方与观测次数n比值的平方根。</p>
+<p>示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">#真实值</div><div class="line">true = [100, 50, 30, 20]</div><div class="line">#预测值</div><div class="line">pred = [90, 50, 50, 30]</div><div class="line"></div><div class="line">from sklearn import metrics</div><div class="line">import numpy as np</div><div class="line"></div><div class="line">print (&quot;平均绝对误差--MAE by hand:&quot;,(10 + 0 + 20 + 10)/4.)</div><div class="line">print (&quot;MAE:&quot;,metrics.mean_absolute_error(true, pred))</div><div class="line"></div><div class="line">print (&quot;均方误差--MSE by hand:&quot;,(10**2 + 0**2 + 20**2 + 10**2)/4.)</div><div class="line">print(&quot;MSE:&quot;,metrics.mean_squared_error(true, pred))</div><div class="line"></div><div class="line">print (&quot;均方根误差--RMSE by hand:&quot;,np.sqrt((10**2 + 0**2 + 20**2 + 10**2)/4.))</div><div class="line">print (&quot;RMSE:&quot;,np.sqrt(metrics.mean_squared_error(true, pred)))</div></pre></td></tr></table></figure>
+<p>输出：<br><code>平均绝对误差--MAE by hand: 10.0
+MAE: 10.0
+均方误差--MSE by hand: 150.0
+MSE: 150.0
+均方根误差--RMSE by hand: 12.2474487139
+RMSE: 12.2474487139</code></p>
+<p>下面通过上面的公式，我们可以计算下销售额的RMSE：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print (&quot;销售额的RMSE：&quot;,np.sqrt(metrics.mean_squared_error(y_test, y_pred)))</div></pre></td></tr></table></figure>
+<p>输出：<br><code>销售额的RMSE： 1.40465142303</code></p>
+<h2 id="4-特征选择"><a href="#4-特征选择" class="headerlink" title="4. 特征选择"></a>4. 特征选择</h2><p>从上面的出的训练公式y=2.88+0.0466∗TV+0.179∗radio+0.00345∗newspaper<br>可以看出，newspaper和销量之间的线性关系是最弱的，我们尝试移除这个特征，再看下回归预测的结果的RMSE。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">feature_new_cols = [&apos;TV&apos;, &apos;radio&apos;]</div><div class="line">X1 = data[feature_new_cols]</div><div class="line">print(X1.head())</div><div class="line">y1 = data.sales</div><div class="line"></div><div class="line">X1_train, X1_test, y1_train, y1_test = train_test_split(X1, y1, test_size=0.25,random_state=1)</div><div class="line">linreg.fit(X1_train, y1_train)</div><div class="line"></div><div class="line"></div><div class="line"># 截距</div><div class="line">print (linreg.intercept_)</div><div class="line"></div><div class="line"># 系数</div><div class="line">print (linreg.coef_)</div><div class="line"></div><div class="line">y1_pred = linreg.predict(X1_test)</div><div class="line"></div><div class="line">print(&quot;去除NewsPaper的销售额的RMSE：&quot;,np.sqrt(metrics.mean_squared_error(y1_test,y1_pred)))</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<p><code>截距： 2.92723732027
+系数： [ 0.04660234  0.18117959]
+去除NewsPaper的销售额的RMSE： 1.38790346994</code><br>可以看到去除特征newspaper后，得到的RSME变小了，说明newspaper并不适合做销量预测的特征。这样我们就得到了销量和TV、radio的新模型</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/19/Matplotilb数据可视化/" rel="next" title="Matplotilb数据可视化">
+                <i class="fa fa-chevron-left"></i> Matplotilb数据可视化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://ws4.sinaimg.cn/large/006tNbRwly1fgnhf039goj30tt0tyn6o.jpg"
+               alt="布莱恩没有布" />
+          <p class="site-author-name" itemprop="name">布莱恩没有布</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据分析通常大家都会建议先学习Numpy（一个支持多维数组的Python库），可能之前的确是这样的，但是现在几乎很少用到Numpy了，一些新的类库基于Numpy进行了封装和扩展，这些库比Numpy更加易用和强大，比如Pandas。Pandas已经成为了处理数据主要使用的类库。"><span class="nav-number">1.</span> <span class="nav-text">数据分析通常大家都会建议先学习Numpy（一个支持多维数组的Python库），可能之前的确是这样的，但是现在几乎很少用到Numpy了，一些新的类库基于Numpy进行了封装和扩展，这些库比Numpy更加易用和强大，比如Pandas。Pandas已经成为了处理数据主要使用的类库。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Matplotlib是Python主要的绘图库。但是如果初学的话，可以从Seaborn开始入手，Matplotlib虽然功能强大，但是很复杂，绘制的图形如果想要达到预期的效果，往往需要经过大量的调整。Seaborn本质上使用Matplotlib作为核心库（就像上面Pandas与Numpy的关系一样）"><span class="nav-number">2.</span> <span class="nav-text">Matplotlib是Python主要的绘图库。但是如果初学的话，可以从Seaborn开始入手，Matplotlib虽然功能强大，但是很复杂，绘制的图形如果想要达到预期的效果，往往需要经过大量的调整。Seaborn本质上使用Matplotlib作为核心库（就像上面Pandas与Numpy的关系一样）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-使用pandas来读取数据"><span class="nav-number"></span> <span class="nav-text">1. 使用pandas来读取数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-线性回归模型"><span class="nav-number"></span> <span class="nav-text">2. 线性回归模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#（1）使用Pandas构建x和y"><span class="nav-number"></span> <span class="nav-text">（1）使用Pandas构建x和y</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-构造训练集和测试集"><span class="nav-number"></span> <span class="nav-text">(2)构造训练集和测试集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Scikit-learn的线性回归"><span class="nav-number"></span> <span class="nav-text">(3)Scikit-learn的线性回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-预测"><span class="nav-number"></span> <span class="nav-text">(4)预测</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#平均绝对误差-MAE"><span class="nav-number">1.</span> <span class="nav-text">平均绝对误差 MAE</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#均方误差-MSE"><span class="nav-number">2.</span> <span class="nav-text">均方误差 MSE</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#均方根误差-RMSE"><span class="nav-number">3.</span> <span class="nav-text">均方根误差 RMSE</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-特征选择"><span class="nav-number"></span> <span class="nav-text">4. 特征选择</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">布莱恩没有布</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "ac8807c99a7e48a1a551bdccbb46edc0",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("jMVQrETP1B0CN6xLQed92MgU-gzGzoHsz", "smqMp8b8Q3v0YeWFeouV8eH9");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
